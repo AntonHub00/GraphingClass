@@ -3,7 +3,7 @@ Testing "techniques" for printing the image
 */
 #include <stdio.h>
 
-#define SIZE 40
+#define SIZE 400
 
 void set_background(int ptr_image[][SIZE], int color);
 
@@ -49,7 +49,7 @@ int main()
     paint(image, 12, 12, 22, 14, 7);
     paint(image, 12, 14, 16, 16, 7);
     paint(image, 10, 16, 14, 18, 7);
-    paint(image, 6, 18, 14, 20, 1);
+    paint(image, 6, 18, 14, 20, 7);
 
     //Inside mushroom (2 down)
     paint(image, 22, 6, 24, 16, 7);
@@ -89,9 +89,9 @@ void print_image(int ptr_image[][SIZE])
 
 void paint(int ptr_image[][SIZE], int x1, int y1, int x2, int y2, int color)
 {
-    for (int i = x1; i < x2; i++)
+    for (int i = x1 * 10; i < x2 * 10; i++)
     {
-        for (int j = y1; j < y2; j++)
+        for (int j = y1 * 10; j < y2 * 10; j++)
         {
             ptr_image[i][j] = color;
         }
