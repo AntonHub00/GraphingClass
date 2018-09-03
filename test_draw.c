@@ -89,9 +89,11 @@ void print_image(int ptr_image[][SIZE])
 
 void paint(int ptr_image[][SIZE], int x1, int y1, int x2, int y2, int color)
 {
-    for (int i = x1 * 10; i < x2 * 10; i++)
+    int resize = SIZE / 40;
+
+    for (int i = x1 * resize; i < x2 * resize; i++)
     {
-        for (int j = y1 * 10; j < y2 * 10; j++)
+        for (int j = y1 * resize; j < y2 * resize; j++)
         {
             ptr_image[i][j] = color;
         }
