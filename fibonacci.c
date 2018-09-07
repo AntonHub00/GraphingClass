@@ -39,7 +39,7 @@ void print_matrix(int ptr_matrix[][SIZE])
     {
         for (int j = 0; j < SIZE; j++)
         {
-            printf("%d ", ptr_matrix[i][j]);
+            printf("%5d ", ptr_matrix[i][j]);
         }
         printf("\n");
     }
@@ -72,12 +72,12 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
             {
                 direction_flag = 'r';
                 check_final++;
+                check_counter = 0;
             }
 
             if (check_final == 2)
             {
                 check_final = 0;
-                check_counter = 0;
                 counter++;
             }
         }
@@ -91,12 +91,12 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
             {
                 direction_flag = 'd';
                 check_final++;
+                check_counter = 0;
             }
 
             if (check_final == 2)
             {
                 check_final = 0;
-                check_counter = 0;
                 counter++;
             }
         }
@@ -110,12 +110,12 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
             {
                 direction_flag = 'l';
                 check_final++;
+                check_counter = 0;
             }
 
             if (check_final == 2)
             {
                 check_final = 0;
-                check_counter = 0;
                 counter++;
             }
         }
@@ -129,16 +129,12 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
             {
                 direction_flag = 'u';
                 check_final++;
+                check_counter = 0;
             }
 
-            //This should be just when direction_flag = l (left)
-            if (check_final == 2 && row == 0 && column == SIZE - 1)
-                check_final--;
-
-            else if (check_final == 2)
+            if (check_final == 2)
             {
                 check_final = 0;
-                check_counter = 0;
                 counter++;
             }
         }
