@@ -24,7 +24,7 @@ void fibonacci(int ptr_matrix[][SIZE])
     void insert_spiral(int ptr_matrix[][SIZE], int number);
     int a = 1, b = 1, aux = 0;
 
-    for (int i = 1; i < SIZE * SIZE; i++)
+    for (int i = 0; i < SIZE * SIZE; i++)
     {
         insert_spiral(ptr_matrix, a);
         aux = b;
