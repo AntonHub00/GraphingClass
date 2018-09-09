@@ -3,7 +3,7 @@ Fibonacci display in spiral
 */
 #include <stdio.h>
 
-#define SIZE 5
+#define SIZE 3
 
 void fibonacci(int ptr_matrix[][SIZE]);
 void print_matrix(int ptr_matrix[][SIZE]);
