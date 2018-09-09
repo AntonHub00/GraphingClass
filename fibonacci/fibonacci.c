@@ -3,7 +3,7 @@ Fibonacci display in spiral
 */
 #include <stdio.h>
 
-#define SIZE 3
+#define SIZE 5
 
 void fibonacci(int ptr_matrix[][SIZE]);
 void print_matrix(int ptr_matrix[][SIZE]);
@@ -55,11 +55,11 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
     */
     static char direction_flag = 'u';
     static int counter = 1;
-    static int row = SIZE / 2, column = SIZE / 2;
+    static int row = SIZE / 2, column = SIZE % 2 == 0 ? (SIZE / 2) - 1 : (SIZE / 2);
     static int check_final = 0, check_counter = 0;
 
-    if (ptr_matrix[SIZE / 2][SIZE / 2] == 0)
-        ptr_matrix[SIZE / 2][SIZE / 2] = number;
+    if (ptr_matrix[SIZE / 2][SIZE % 2 == 0 ? (SIZE / 2) - 1 : (SIZE / 2)] == 0)
+        ptr_matrix[SIZE / 2][SIZE % 2 == 0 ? (SIZE / 2) - 1 : (SIZE / 2)] = number;
     else
     {
         if (direction_flag == 'u')
@@ -74,12 +74,6 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
                 check_final++;
                 check_counter = 0;
             }
-
-            if (check_final == 2)
-            {
-                check_final = 0;
-                counter++;
-            }
         }
         else if (direction_flag == 'r')
         {
@@ -92,12 +86,6 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
                 direction_flag = 'd';
                 check_final++;
                 check_counter = 0;
-            }
-
-            if (check_final == 2)
-            {
-                check_final = 0;
-                counter++;
             }
         }
         else if (direction_flag == 'd')
@@ -112,12 +100,6 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
                 check_final++;
                 check_counter = 0;
             }
-
-            if (check_final == 2)
-            {
-                check_final = 0;
-                counter++;
-            }
         }
         else if (direction_flag == 'l')
         {
@@ -131,12 +113,12 @@ void insert_spiral(int ptr_matrix[][SIZE], int number)
                 check_final++;
                 check_counter = 0;
             }
+        }
 
-            if (check_final == 2)
-            {
-                check_final = 0;
-                counter++;
-            }
+        if (check_final == 2)
+        {
+            check_final = 0;
+            counter++;
         }
     }
 }
