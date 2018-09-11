@@ -1,2 +1,5 @@
 #Ignore Visual Studio Code configuration files
 .vscode/
+
+#Other archives wich I can use to help with some tasks
+others/
