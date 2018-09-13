@@ -6,7 +6,7 @@ Testing "techniques" for printing the image
 #include <opencv2/highgui/highgui.hpp>
 #include <stdio.h>
 
-#define SIZE 800
+#define SIZE 400
 
 using namespace cv;
 using namespace std;
@@ -23,7 +23,7 @@ int main()
 {
     int image[SIZE][SIZE];
 
-    set_background(image, 255);
+    set_background(image, 230);
 
     //Left side
     paint(image, 14, 4, 28, 6, 0);
@@ -51,15 +51,15 @@ int main()
     paint(image, 26, 16, 30, 18, 0);
 
     //Inside mushroom (5 up)
-    paint(image, 10, 10, 14, 12, 128);
-    paint(image, 12, 12, 22, 14, 128);
-    paint(image, 12, 14, 16, 16, 128);
-    paint(image, 10, 16, 14, 18, 128);
-    paint(image, 6, 18, 14, 20, 128);
+    paint(image, 10, 10, 14, 12, 150);
+    paint(image, 12, 12, 22, 14, 150);
+    paint(image, 12, 14, 16, 16, 150);
+    paint(image, 10, 16, 14, 18, 150);
+    paint(image, 6, 18, 14, 20, 150);
 
     //Inside mushroom (2 down)
-    paint(image, 22, 6, 24, 16, 128);
-    paint(image, 24, 6, 26, 10, 128);
+    paint(image, 22, 6, 24, 16, 150);
+    paint(image, 24, 6, 26, 10, 150);
 
     //Completing the half "automatically"
     complete_half(image);
@@ -68,17 +68,30 @@ int main()
     // print_image(image);
 
     int i, j;
-    Mat m(SIZE, SIZE, CV_8UC1, Scalar(255));
+    Mat m(SIZE, SIZE, CV_8UC1);
     for (i = 0; i < SIZE; i++)
     {
         for (j = 0; j < SIZE; j++)
         {
-            m.at<uchar>(i, j) = image[i][j];
+            // m.at<uchar>(i, j) = image[i][j];
+
+            // m.at<uchar>(i, j) = 255 - image[i][j];
+
+            // m.at<uchar>(i, j) = (image[i][j]) < 128 ? 0 : 255;
+
+            // if (!(image[i][j] > (255 - 100)))
+            // {
+            //     m.at<uchar>(i, j) = image[i][j] + 100;
+            // }
+
+            // if (!(image[i][j] < 0 + 100))
+            // {
+            //     m.at<uchar>(i, j) = image[i][j] - 100;
+            // }
         }
     }
 
     namedWindow("img", WINDOW_AUTOSIZE);
-
     imshow("img", m);
 
     waitKey(0);
