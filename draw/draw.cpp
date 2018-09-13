@@ -6,11 +6,12 @@ Testing "techniques" for printing the image
 #include <opencv2/highgui/highgui.hpp>
 #include <stdio.h>
 
-#define SIZE 400
+#define SIZE 160
 
 using namespace cv;
 using namespace std;
 
+//Beginning of Functions
 void set_background(int ptr_image[][SIZE], int color);
 
 void print_image(int[][SIZE]);
@@ -19,11 +20,18 @@ void paint(int ptr_image[][SIZE], int x1, int y1, int x2, int y2, int color);
 
 void complete_half(int ptr_image[][SIZE]);
 
+void draw_line(Mat ptr_canvas, int init, int fin, int current);
+
+void fill_canvas(Mat ptr_canvas, int ptr_image[][SIZE]);
+
+//End of functions
+
+//Beginning of main
 int main()
 {
     int image[SIZE][SIZE];
 
-    set_background(image, 230);
+    set_background(image, 255);
 
     //Left side
     paint(image, 14, 4, 28, 6, 0);
@@ -51,54 +59,32 @@ int main()
     paint(image, 26, 16, 30, 18, 0);
 
     //Inside mushroom (5 up)
-    paint(image, 10, 10, 14, 12, 150);
-    paint(image, 12, 12, 22, 14, 150);
-    paint(image, 12, 14, 16, 16, 150);
-    paint(image, 10, 16, 14, 18, 150);
-    paint(image, 6, 18, 14, 20, 150);
+    paint(image, 10, 10, 14, 12, 200);
+    paint(image, 12, 12, 22, 14, 200);
+    paint(image, 12, 14, 16, 16, 200);
+    paint(image, 10, 16, 14, 18, 200);
+    paint(image, 6, 18, 14, 20, 200);
 
     //Inside mushroom (2 down)
-    paint(image, 22, 6, 24, 16, 150);
-    paint(image, 24, 6, 26, 10, 150);
+    paint(image, 22, 6, 24, 16, 200);
+    paint(image, 24, 6, 26, 10, 200);
 
     //Completing the half "automatically"
     complete_half(image);
 
-    //Print the complete image
-    // print_image(image);
+    Mat canvas(SIZE * 4, SIZE * 3, CV_8UC1, Scalar(230));
 
-    int i, j;
-    Mat m(SIZE, SIZE, CV_8UC1);
-    for (i = 0; i < SIZE; i++)
-    {
-        for (j = 0; j < SIZE; j++)
-        {
-            // m.at<uchar>(i, j) = image[i][j];
-
-            // m.at<uchar>(i, j) = 255 - image[i][j];
-
-            // m.at<uchar>(i, j) = (image[i][j]) < 128 ? 0 : 255;
-
-            // if (!(image[i][j] > (255 - 100)))
-            // {
-            //     m.at<uchar>(i, j) = image[i][j] + 100;
-            // }
-
-            // if (!(image[i][j] < 0 + 100))
-            // {
-            //     m.at<uchar>(i, j) = image[i][j] - 100;
-            // }
-        }
-    }
+    fill_canvas(canvas, image);
 
     namedWindow("img", WINDOW_AUTOSIZE);
-    imshow("img", m);
+    imshow("img", canvas);
 
     waitKey(0);
 
     return 0;
-}
+} //End of main
 
+//Beginning of set_background
 void set_background(int ptr_image[][SIZE], int color)
 {
     for (int i = 0; i < SIZE; i++)
@@ -108,8 +94,9 @@ void set_background(int ptr_image[][SIZE], int color)
             ptr_image[i][j] = color;
         }
     }
-}
+} //End of set_background
 
+//Beginning of print_image
 void print_image(int ptr_image[][SIZE])
 {
     for (int i = 0; i < SIZE; i++)
@@ -120,8 +107,9 @@ void print_image(int ptr_image[][SIZE])
         }
         printf("\n");
     }
-}
+} //End of print_image
 
+//Beginning of paint
 void paint(int ptr_image[][SIZE], int x1, int y1, int x2, int y2, int color)
 {
     int resize = SIZE / 40;
@@ -133,8 +121,9 @@ void paint(int ptr_image[][SIZE], int x1, int y1, int x2, int y2, int color)
             ptr_image[i][j] = color;
         }
     }
-}
+} //End of paint
 
+//Beginning of complete_half
 void complete_half(int ptr_image[][SIZE])
 {
     int aux = SIZE - 1;
@@ -149,4 +138,73 @@ void complete_half(int ptr_image[][SIZE])
             aux--;
         }
     }
+} //End of complete_half
+
+//Beginning of draw_line
+void draw_line(Mat ptr_canvas, int init, int fin, int current)
+{
+    for (init; init < fin; init++)
+    {
+        ptr_canvas.at<uchar>(current, init) = 0;
+    }
+} //End of draw_line
+
+//Beginning of fill_canvas
+void fill_canvas(Mat ptr_canvas, int ptr_image[][SIZE])
+{
+    int i, j, place = 0;
+
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            ptr_canvas.at<uchar>(place, j) = ptr_image[i][j];
+        }
+        place++;
+    }
+
+    draw_line(ptr_canvas, j, (SIZE * 3), place);
+
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            ptr_canvas.at<uchar>(place, j) = 255 - ptr_image[i][j];
+        }
+        place++;
+    }
+
+    draw_line(ptr_canvas, j, (SIZE * 3), place);
+
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            ptr_canvas.at<uchar>(place, j) = (ptr_image[i][j]) < 128 ? 0 : 255;
+        }
+        place++;
+    }
+
+    draw_line(ptr_canvas, j, (SIZE * 3), place);
+
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            if (!(ptr_image[i][j] < 150))
+            {
+                ptr_canvas.at<uchar>(place, j) = ptr_image[i][j] - 150;
+            }
+            else
+            {
+                ptr_canvas.at<uchar>(place, j) = 0;
+            }
+        }
+        place++;
+    }
+} //End of fill_canvas
+
+//Beginning of histogram
+void histogram()
+{
 }
