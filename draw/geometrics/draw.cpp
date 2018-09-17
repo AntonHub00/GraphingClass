@@ -6,7 +6,7 @@ Testing "techniques" for printing the image
 #include <opencv2/highgui/highgui.hpp>
 #include <stdio.h>
 
-#define SIZE 160
+#define SIZE 400
 
 using namespace cv;
 using namespace std;
@@ -23,6 +23,8 @@ void complete_half(int ptr_image[][SIZE]);
 void draw_line(Mat ptr_canvas, int init, int fin, int current);
 
 void fill_canvas(Mat ptr_canvas, int ptr_image[][SIZE]);
+
+// int resize(int value, int resize);
 
 //End of functions
 
@@ -72,9 +74,27 @@ int main()
     //Completing the half "automatically"
     complete_half(image);
 
-    Mat canvas(SIZE * 4, SIZE * 3, CV_8UC1, Scalar(230));
+    // int x = 1;
 
-    fill_canvas(canvas, image);
+    // if (x == 1)
+    // {
+         Mat canvas(SIZE, SIZE, CV_8UC1, Scalar(230));
+    // }
+    // else
+    // {
+    //     Mat canvas(SIZE, SIZE, CV_8UC1, Scalar(230));
+    // }
+
+    //fill_canvas(canvas, image);
+
+    int i, j;
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            canvas.at<uchar>(i, j) = image[i][j];
+        }
+    }
 
     namedWindow("img", WINDOW_AUTOSIZE);
     imshow("img", canvas);
@@ -205,6 +225,18 @@ void fill_canvas(Mat ptr_canvas, int ptr_image[][SIZE])
 } //End of fill_canvas
 
 //Beginning of histogram
-void histogram()
+// void histogram()
+// {
+// }
+
+void resize_one(Mat ptr_canvas, int ptr_image[][SIZE], int value)
 {
+    int i, j;
+    for (i = 0; i < SIZE; i++)
+    {
+        for (j = 0; j < SIZE; j++)
+        {
+            ptr_canvas.at<uchar>(i * value, j * value) = ptr_image[i][j];
+        }
+    }
 }
