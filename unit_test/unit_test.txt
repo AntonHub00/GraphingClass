@@ -1,0 +1,45 @@
+With n = 100
+
+n = 100
+n = 111
+n = 101
+n = 91
+
+end
+
+With n = 98
+
+n = 98
+n = 109
+n = 99
+n = 110
+n = 100
+n = 111
+n = 101
+n = 91
+
+end
+
+With n = 120
+
+n = 120
+n = 110
+
+end
+
+With n = 101
+
+n = 101
+n = 91
+
+end
+
+With n = 345
+
+n = 345
+n = 335
+
+end
+
+For number <= 101 the result is 91
+For numbers > 101 the result is number -1 10
