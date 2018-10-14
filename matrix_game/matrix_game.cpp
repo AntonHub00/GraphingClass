@@ -17,27 +17,29 @@ using namespace std;
 #define DOWN_KEY 115
 #define INTRO 10
 
-void draw_grid(Mat ptr_canvas);
-int set_position();
+void draw_grid(Mat ptr_canvas, int x_selected = -1, int y_selected = -1);
+void set_position(Mat ptr_canvas, int x_y[]);
+bool value_bounded(int value);
+int draw_selection(Mat ptr_ptr_canvas, Mat ptr_temp, int x, int y);
 
 int main()
 {
     Mat canvas(SIZE, SIZE, CV_8UC3, Scalar(255, 255, 255));
-    int position;
-
-    position = set_position();
+    int init_point[2];
 
     draw_grid(canvas);
-
-    namedWindow("Draw", WINDOW_AUTOSIZE);
     imshow("Draw", canvas);
+    waitKey(100);
 
+    set_position(canvas, init_point);
+
+    //namedWindow("Draw", WINDOW_AUTOSIZE);
     waitKey(0);
 
     return 0;
 }
 
-void draw_grid(Mat ptr_canvas)
+void draw_grid(Mat ptr_canvas, int x_selected, int y_selected)
 {
     Point vertices[4];
     int i, j;
@@ -51,11 +53,19 @@ void draw_grid(Mat ptr_canvas)
             vertices[1] = Point(x + 100, y);
             vertices[2] = Point(x + 100, y + 100);
             vertices[3] = Point(x, y + 100);
-            if(i == 0 &&  j >= 2 || i == 4 && j < 2)
-                fillConvexPoly(ptr_canvas, vertices, 4, Scalar(0, 0, 0));
-            else
-                fillConvexPoly(ptr_canvas, vertices, 4, Scalar(200, 200, 200));
-                //fillConvexPoly(ptr_canvas, vertices, 4, Scalar(255, 101, 106));
+
+            //Draw black squares by default
+            if(x_selected == -1 && y_selected == -1)
+            {
+                if(i == 0 &&  j >= 2 || i == 4 && j < 2)
+                    fillConvexPoly(ptr_canvas, vertices, 4, Scalar(0, 0, 0));
+                else
+                    fillConvexPoly(ptr_canvas, vertices, 4, Scalar(200, 200, 200));
+            }else
+            {
+                if(i == y_selected &&  j == x_selected)
+                    fillConvexPoly(ptr_canvas, vertices, 4, Scalar(255, 101, 106));
+            }
             x += 105;
         }
         x = 5;
@@ -63,10 +73,17 @@ void draw_grid(Mat ptr_canvas)
     }
 }
 
-int set_position()
+void set_position(Mat ptr_canvas, int x_y[])
 {
     //void draw_cell(Mat ptr_canvas);
+    Mat temp;
+    ptr_canvas.copyTo(temp);
+    draw_grid(temp, 0, 0);
+    imshow("Draw", temp);
+    waitKey(100);
+
     char answer = INTRO, aux;
+    int x = 0, y = 0;
 
     do
     {
@@ -78,11 +95,55 @@ int set_position()
             break;
 
         answer = aux;
+
+        switch(answer)
+        {
+            case LEFT_KEY: x--;
+                           x += draw_selection(ptr_canvas, temp, x, y);
+                           break;
+            case RIGHT_KEY: x++;
+                           x -= draw_selection(ptr_canvas, temp, x, y);
+                           break;
+            case UP_KEY: y--;
+                           y += draw_selection(ptr_canvas, temp, x, y);
+                           break;
+            case DOWN_KEY: y++;
+                           y -= draw_selection(ptr_canvas, temp, x, y);
+                           break;
+        }
+
     }while(true);
 
-    cout << int(answer);
+    //cout << int(answer);
+
+    x_y[0] = x;
+    x_y[1] = y;
 }
 
-//void draw_cell(Mat ptr_canvas)
+bool value_bounded(int value)
+{
+    if(value >= 0 && value < 5)
+        return true;
+    else
+    {
+        cout << "Movimiento no válido" << endl;
+        return false;
+    }
+}
+
+int draw_selection(Mat ptr_ptr_canvas, Mat ptr_temp, int x, int y)
+{
+    if (value_bounded(x) && value_bounded(y))
+    {
+        ptr_ptr_canvas.copyTo(ptr_temp);
+        draw_grid(ptr_temp, x, y);
+        imshow("Draw", ptr_temp);
+        waitKey(100);
+        return 0;
+    }else
+        return 1;
+}
+
+//void draw_cell(Mat ptr_canvas, int point[])
 //{
 //}
