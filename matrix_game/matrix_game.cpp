@@ -17,10 +17,10 @@ using namespace std;
 #define DOWN_KEY 115
 #define INTRO 10
 
-void draw_grid(Mat ptr_canvas, int x_selected = -1, int y_selected = -1);
-void set_position(Mat ptr_canvas, int x_y[]);
+void draw_grid(Mat image, int x_selected = -1, int y_selected = -1);
+void set_position(int x_y[]);
 bool value_bounded(int value);
-int draw_selection(Mat ptr_ptr_canvas, Mat ptr_temp, int x, int y);
+int draw_selection(Mat ptr_temp, int x, int y);
 
 int main()
 {
@@ -31,7 +31,7 @@ int main()
     imshow("Draw", canvas);
     waitKey(100);
 
-    set_position(canvas, init_point);
+    set_position(init_point);
 
     //namedWindow("Draw", WINDOW_AUTOSIZE);
     waitKey(0);
@@ -39,7 +39,7 @@ int main()
     return 0;
 }
 
-void draw_grid(Mat ptr_canvas, int x_selected, int y_selected)
+void draw_grid(Mat image, int x_selected, int y_selected)
 {
     Point vertices[4];
     int i, j;
@@ -58,13 +58,13 @@ void draw_grid(Mat ptr_canvas, int x_selected, int y_selected)
             if(x_selected == -1 && y_selected == -1)
             {
                 if(i == 0 &&  j >= 2 || i == 4 && j < 2)
-                    fillConvexPoly(ptr_canvas, vertices, 4, Scalar(0, 0, 0));
+                    fillConvexPoly(image, vertices, 4, Scalar(0, 0, 0));
                 else
-                    fillConvexPoly(ptr_canvas, vertices, 4, Scalar(200, 200, 200));
+                    fillConvexPoly(image, vertices, 4, Scalar(200, 200, 200));
             }else
             {
                 if(i == y_selected &&  j == x_selected)
-                    fillConvexPoly(ptr_canvas, vertices, 4, Scalar(255, 101, 106));
+                    fillConvexPoly(image, vertices, 4, Scalar(255, 101, 106));
             }
             x += 105;
         }
@@ -73,11 +73,11 @@ void draw_grid(Mat ptr_canvas, int x_selected, int y_selected)
     }
 }
 
-void set_position(Mat ptr_canvas, int x_y[])
+void set_position(int x_y[])
 {
     //void draw_cell(Mat ptr_canvas);
-    Mat temp;
-    ptr_canvas.copyTo(temp);
+    Mat temp(SIZE, SIZE, CV_8UC3, Scalar(255, 255, 255));
+    draw_grid(temp);
     draw_grid(temp, 0, 0);
     imshow("Draw", temp);
     waitKey(100);
@@ -87,6 +87,7 @@ void set_position(Mat ptr_canvas, int x_y[])
 
     do
     {
+        draw_grid(temp);
         cout << "Move with a, s, d, w (Enter to confirm or double enter to set):";
         aux = getchar();
         getchar();
@@ -99,16 +100,16 @@ void set_position(Mat ptr_canvas, int x_y[])
         switch(answer)
         {
             case LEFT_KEY: x--;
-                           x += draw_selection(ptr_canvas, temp, x, y);
+                           x += draw_selection(temp, x, y);
                            break;
             case RIGHT_KEY: x++;
-                           x -= draw_selection(ptr_canvas, temp, x, y);
+                           x -= draw_selection(temp, x, y);
                            break;
             case UP_KEY: y--;
-                           y += draw_selection(ptr_canvas, temp, x, y);
+                           y += draw_selection(temp, x, y);
                            break;
             case DOWN_KEY: y++;
-                           y -= draw_selection(ptr_canvas, temp, x, y);
+                           y -= draw_selection(temp, x, y);
                            break;
         }
 
@@ -125,17 +126,25 @@ bool value_bounded(int value)
     if(value >= 0 && value < 5)
         return true;
     else
-    {
-        cout << "Movimiento no válido" << endl;
+
         return false;
-    }
+
 }
 
-int draw_selection(Mat ptr_ptr_canvas, Mat ptr_temp, int x, int y)
+bool value_in_rock(int x, int y)
 {
-    if (value_bounded(x) && value_bounded(y))
+    if(x >= 2 && y == 0)
+        return true;
+    else if (x < 2 && y == 4)
+        return true;
+    else
+        return false;
+}
+
+int draw_selection(Mat ptr_temp, int x, int y)
+{
+    if (value_bounded(x) && value_bounded(y) && !(value_in_rock(x, y)))
     {
-        ptr_ptr_canvas.copyTo(ptr_temp);
         draw_grid(ptr_temp, x, y);
         imshow("Draw", ptr_temp);
         waitKey(100);
