@@ -26,13 +26,6 @@ int main()
         {
             theta = i * 0.01745333333;
 
-            //R = 200;
-            //r = 25;
-            //x = m + (R + r) * cos(theta) - r * cos(((R + r) / r) * theta);
-            //y = m - (R + r) * sin(theta) + r * sin(((R + r) / r) * theta);
-            //circle(canvas, Point(x, y), 2, Scalar(0, 0, 0), -1);
-
-
             for (j = 200; j > 0; j -= 2)
             {
                 R = j;
@@ -41,23 +34,6 @@ int main()
                 y = m - (R + r) * sin(theta) + r * sin(((R + r) / r) * theta);
                 circle(canvas, Point(x, y), 2, Scalar(0, 0, 0), -1);
             }
-            //R = 100;
-            //r = 25;
-            //x = m + (R + r) * cos(theta) - r * cos(((R + r) / r) * theta);
-            //y = m - (R + r) * sin(theta) + r * sin(((R + r) / r) * theta);
-            //circle(canvas, Point(x, y), 2, Scalar(0, 0, 0), -1);
-
-            //R = 50;
-            //r = 25;
-            //x = m + (R + r) * cos(theta) - r * cos(((R + r) / r) * theta);
-            //y = m - (R + r) * sin(theta) + r * sin(((R + r) / r) * theta);
-            //circle(canvas, Point(x, y), 2, Scalar(0, 0, 0), -1);
-
-            //R = 50;
-            //r = 25;
-            //x = m + (R + r) * cos(theta) - r * cos(((R + r) / r) * theta);
-            //y = m - (R + r) * sin(theta) + r * sin(((R + r) / r) * theta);
-            //circle(canvas, Point(x, y), 2, Scalar(0, 0, 0), -1);
 
             imshow("Draw", canvas);
             waitKey(5);
