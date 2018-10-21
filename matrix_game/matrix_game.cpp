@@ -18,30 +18,52 @@ using namespace std;
 #define INTRO 10
 
 void draw_grid(Mat image, int x_selected = -1, int y_selected = -1);
-void set_position(int x_y[]);
 bool value_bounded(int value);
+bool value_in_rock(int x, int y);
 int draw_selection(Mat ptr_temp, int x, int y);
+void set_position(int x_y[]);
+void draw_till_border(Mat ptr_canvas, int x, int y);
+bool is_filled();
+
+struct square
+{
+    Point initial_point;
+    Point final_point;
+    Scalar color;
+    bool ocupated;
+};
+
+struct square squares[5][5];
 
 int main()
 {
+    //cout << "true" << endl;
     Mat canvas(SIZE, SIZE, CV_8UC3, Scalar(255, 255, 255));
     int init_point[2];
 
+    //rectangle(canvas, Point(0, 0), Point(100, 100), Scalar(0, 0, 255), CV_FILLED);
+    //circle(canvas, Point(100, 100), 50, Scalar(0, 0, 255), CV_FILLED);
     draw_grid(canvas);
-    imshow("Draw", canvas);
+    imshow("Game", canvas);
     waitKey(100);
 
     set_position(init_point);
 
-    //namedWindow("Draw", WINDOW_AUTOSIZE);
+    cout << "----------Now the selection will be painted till the border or the black tiles----------" << endl;
+
+    draw_till_border(canvas, init_point[0], init_point[1]);
+
+    //cout << init_point[0] <<endl;
+    //cout << init_point[1] <<endl;
+
     waitKey(0);
 
     return 0;
 }
 
+
 void draw_grid(Mat image, int x_selected, int y_selected)
 {
-    Point vertices[4];
     int i, j;
     int x = 5, y = 5;
 
@@ -49,22 +71,32 @@ void draw_grid(Mat image, int x_selected, int y_selected)
     {
         for(j = 0; j < 5; j++)
         {
-            vertices[0] = Point(x, y);
-            vertices[1] = Point(x + 100, y);
-            vertices[2] = Point(x + 100, y + 100);
-            vertices[3] = Point(x, y + 100);
 
             //Draw black squares by default
             if(x_selected == -1 && y_selected == -1)
             {
+                squares[i][j].initial_point = Point(x, y);
+                squares[i][j].final_point = Point(x + 100, y + 100);
+                squares[i][j].ocupated = false;
+
                 if(i == 0 &&  j >= 2 || i == 4 && j < 2)
-                    fillConvexPoly(image, vertices, 4, Scalar(0, 0, 0));
+                {
+                    squares[i][j].color = Scalar(0, 0, 0);
+                    rectangle(image, squares[i][j].initial_point, squares[i][j].final_point, squares[i][j].color, CV_FILLED);
+                }
                 else
-                    fillConvexPoly(image, vertices, 4, Scalar(200, 200, 200));
-            }else
+                {
+                    squares[i][j].color = Scalar(200, 200, 200);
+                    rectangle(image, squares[i][j].initial_point, squares[i][j].final_point, squares[i][j].color, CV_FILLED);
+                }
+            }
+            else
             {
-                if(i == y_selected &&  j == x_selected)
-                    fillConvexPoly(image, vertices, 4, Scalar(255, 101, 106));
+                if(i == y_selected && j == x_selected)
+                {
+                    squares[i][j].color = Scalar(255, 101, 106);
+                    rectangle(image, squares[i][j].initial_point, squares[i][j].final_point, squares[i][j].color, CV_FILLED);
+                }
             }
             x += 105;
         }
@@ -73,13 +105,41 @@ void draw_grid(Mat image, int x_selected, int y_selected)
     }
 }
 
+bool value_bounded(int value)
+{
+    if(value >= 0 && value < 5)
+        return true;
+    else
+        return false;
+}
+
+bool value_in_rock(int x, int y)
+{
+    if(x >= 2 && y == 0 || x < 2 && y == 4)
+        return true;
+    else
+        return false;
+}
+
+//One at the time
+int draw_selection(Mat ptr_temp, int x, int y)
+{
+    if (value_bounded(x) && value_bounded(y) && !(value_in_rock(x, y)))
+    {
+        draw_grid(ptr_temp, x, y);
+        imshow("Game", ptr_temp);
+        waitKey(100);
+        return 0;
+    }else
+        return 1;
+}
+
 void set_position(int x_y[])
 {
-    //void draw_cell(Mat ptr_canvas);
     Mat temp(SIZE, SIZE, CV_8UC3, Scalar(255, 255, 255));
     draw_grid(temp);
     draw_grid(temp, 0, 0);
-    imshow("Draw", temp);
+    imshow("Game", temp);
     waitKey(100);
 
     char answer = INTRO, aux;
@@ -115,44 +175,75 @@ void set_position(int x_y[])
 
     }while(true);
 
-    //cout << int(answer);
-
     x_y[0] = x;
     x_y[1] = y;
 }
 
-bool value_bounded(int value)
+////Till border
+void draw_till_border(Mat ptr_canvas, int x, int y)
 {
-    if(value >= 0 && value < 5)
-        return true;
-    else
+    bool was_in;
+    imshow("Game", ptr_canvas);
+    waitKey(100);
 
-        return false;
+    char answer = INTRO, aux;
+    draw_selection(ptr_canvas, x, y);
+    squares[x][y].ocupated = true;
 
-}
-
-bool value_in_rock(int x, int y)
-{
-    if(x >= 2 && y == 0)
-        return true;
-    else if (x < 2 && y == 4)
-        return true;
-    else
-        return false;
-}
-
-int draw_selection(Mat ptr_temp, int x, int y)
-{
-    if (value_bounded(x) && value_bounded(y) && !(value_in_rock(x, y)))
+    do
     {
-        draw_grid(ptr_temp, x, y);
-        imshow("Draw", ptr_temp);
-        waitKey(100);
-        return 0;
-    }else
-        return 1;
-}
+        cout << "Move with a, s, d, w (Enter to confirm or double enter to set):";
+        aux = getchar();
+        getchar();
 
-//void draw_cell(Mat ptr_canvas, int point[])
-//{
-//}
+        if(aux == INTRO)
+            break;
+
+        answer = aux;
+
+        switch(answer)
+        {
+            case LEFT_KEY:
+                           x--;
+                           while (value_bounded(x) && value_bounded(y) && !value_in_rock(x, y) && !squares[x][y].ocupated)
+                           {
+                               draw_selection(ptr_canvas, x, y);
+                               squares[x][y].ocupated = true;
+                               x--;
+                           }
+                           x++;
+                           break;
+            case RIGHT_KEY:
+                           x++;
+                           while (value_bounded(x) && value_bounded(y) && !value_in_rock(x, y) && !squares[x][y].ocupated)
+                           {
+                               draw_selection(ptr_canvas, x, y);
+                               squares[x][y].ocupated = true;
+                               x++;
+                           }
+                           x--;
+                           break;
+            case UP_KEY:
+                           y--;
+                           while (value_bounded(x) && value_bounded(y) && !value_in_rock(x, y) && !squares[x][y].ocupated)
+                           {
+                               draw_selection(ptr_canvas, x, y);
+                               squares[x][y].ocupated = true;
+                               y--;
+                           }
+                           y++;
+                           break;
+            case DOWN_KEY:
+                           y++;
+                           while (value_bounded(x) && value_bounded(y) && !value_in_rock(x, y) && !squares[x][y].ocupated)
+                           {
+                               draw_selection(ptr_canvas, x, y);
+                               squares[x][y].ocupated = true;
+                               y++;
+                           }
+                           y--;
+                           break;
+        }
+
+    }while(true);
+}
