@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Generator" CONTENT="Microsoft Word 97">
+   <META NAME="Template" CONTENT="C:\Program Files\MSOffice\Office\html.dot">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (WinNT; I) [Netscape]">
+   <META NAME="Author" CONTENT="Michiel van de Panne">
+   <TITLE>OpenGL Primitives and Colours</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFF0C0" LINK="#0000FF" VLINK="#800080">
+
+<H4>
+OpenGL Drawing Primitives</H4>
+OpenGL supports several basic primitive types, including points, lines,
+quadrilaterals, and geneneral polygons. All of these primitives are specified
+using a sequence of vertices. The diagram below shows the basic primitive
+types, where the numbers indicate the order in which the vertices have
+been specified. Note that for the <TT>GL_LINES</TT> primitive only every
+second vertex causes a line segment to be drawn. Similarly, for the <TT>GL_TRIANGLES</TT>&nbsp;
+primitive, every third vertex causes a triangle to be drawn. Note that
+for the <TT>GL_TRIANGLE_STRIP</TT> and <TT>GL_TRIANGLE_FAN</TT> primitives,
+a new triangle is produced for every additional vertex. All of the closed
+primitives shown below are solid-filled, with the exception of <TT>GL_LINE_LOOP</TT>,
+which only draws lines connecting the vertices.
+<BR>&nbsp;
+<UL><IMG SRC="img/prims.gif" HEIGHT=347 WIDTH=326></UL>
+
+
+<P>The following code fragment illustrates an example of how the primitive
+type is specified and how the sequence of&nbsp; vertices are passed to
+OpenGL. It assumes that a window has already been opened and that an appropriate
+2D coordinate system has already been established.
+<BR>&nbsp;
+<UL><TT>// draw several isolated points</TT>
+
+<P><TT>GLfloat pt[2] = {3.0, 4.0};</TT>
+<BR><TT>glBegin(GL_POINTS);</TT>
+<BR><TT>glVertex2f(1.0, 2.0);&nbsp;&nbsp;&nbsp; // x=1, y=2</TT>
+<BR><TT>glVertex2f(2.0, 3.0);&nbsp;&nbsp;&nbsp; // x=2, y=3</TT>
+<BR><TT>glVertex2fv(pt);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// x=3, y=4</TT>
+<BR><TT>glVertex2i(4,5);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// x=4, y=5</TT>
+<BR><TT>glEnd();</TT></UL>
+&nbsp;
+<BR>The various forms of&nbsp; glVertex function calls are defined as follows:
+
+<P><IMG SRC="Image22.gif" HEIGHT=192 WIDTH=348>
+<BR>The following code fragment specifies a 3D polygon to be drawn, in
+this case a simple square. Note that in this case the same square could
+have been drawn using the GL_QUADS and GL_QUAD_STRIP primitives.
+<UL><TT>GLfloat p1[3] = {0,0,1};</TT>
+<BR><TT>GLfloat p2[3] = {1,0,1};</TT>
+<BR><TT>GLfloat p3[3] = {1,1,1};</TT>
+<BR><TT>GLfloat p4[3] = {0,1,1};</TT>
+
+<P><TT>glBegin(GL_POLYGON);</TT>
+<BR><TT>glVertex3fv(p1);</TT>
+<BR><TT>glVertex3fv(p2);</TT>
+<BR><TT>glVertex3fv(p3);</TT>
+<BR><TT>glVertex3fv(p4);</TT>
+<BR><TT>glEnd();</TT></UL>
+
+<H4>
+Assigning Colours</H4>
+OpenGL maintains a current drawing colour as part of its state information.
+The <FONT FACE="Courier New,Courier">glColor()</FONT> function calls are
+used to change the current drawing colour. assigned using the glColor function
+call. Like <FONT FACE="Courier New,Courier">glVertex()</FONT>, this function
+exists in various instantiations. Colour components are specified in the
+order of red, green, blue. Colour component values are in the range [0...1],
+where 1 corresponds to maximum intensity. For unsigned bytes, the range
+corresponds to [0...255]. All primitives following the fragment of code
+given below would be drawn in green, assuming no additional <FONT FACE="Courier New,Courier">glColor()</FONT>
+function calls are used.<TT></TT>
+
+<P><TT>&nbsp;&nbsp;&nbsp; GLfloat mycolour[3] = {0,0,1}; // blue</TT>
+<BR><TT>&nbsp;&nbsp;&nbsp; glColor3fv( mycolour );&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// blue using vector of floats</TT>
+<BR><TT>&nbsp;&nbsp;&nbsp; glColor3f(1.0, 0.0, 0.0);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// red using floats</TT>
+<BR><TT>&nbsp;&nbsp;&nbsp; glColor3ub(0,255,0);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// green using unsigned bytes</TT><TT></TT>
+
+<P>If desired, a polygon can be smoothly shaded to interpolate colours
+between vertices. This is accomplished by using the GL_SMOOTH shading mode
+(the OpenGL default) and by assigning a desired colour to each vertex,
+as shown in the following example.
+<UL><TT>glShadeModel(GL_SMOOTH);&nbsp;&nbsp;&nbsp; // as opposed to GL_FLAT</TT>
+<BR><TT>glBegin(GL_POLYGON);</TT>
+<BR><TT>glColor3f(1.0, 0.0, 0.0);&nbsp;&nbsp; // red</TT>
+<BR><TT>glVertex3f(0.0, 0.0, 0.0);</TT>
+<BR><TT>glColor3f(0.0, 1.0, 0.0);&nbsp;&nbsp; // green</TT>
+<BR><TT>glVertex3f(1.0, 0.0, 0.0);</TT>
+<BR><TT>glColor3f(0.0, 0.0, 1.0);&nbsp;&nbsp; // blue</TT>
+<BR><TT>glVertex3f(1.0, 1.0, 0.0);</TT>
+<BR><TT>glEnd();</TT></UL>
+A fourth value called <I>alpha</I> is often appended to the colour vector.
+This can be used assign a desired level of transparency to a primitive
+and finds uses in compositing multiple images together. An alpha value
+of 0.0 defines an opaque colour, while an alpha value of 1.0 corresponds
+to complete transparency.
+
+<P>The screen can be cleared to a particular colour as follows:
+
+<P><TT>&nbsp;&nbsp;&nbsp; glClearcolor(1.0, 1.0, 1.0, 0.0);&nbsp;&nbsp;
+// sets the clear colour to white and opaque</TT>
+<BR><TT>&nbsp;&nbsp;&nbsp; glClear( GL_COLOR_BUFFER_BIT);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// clears the colour frame buffer</TT>
+<BR><TT></TT>&nbsp;
+<BR>&nbsp;
+<H4>
+<FONT COLOR="#000000"></FONT></H4>
+
+</BODY>
+</HTML>

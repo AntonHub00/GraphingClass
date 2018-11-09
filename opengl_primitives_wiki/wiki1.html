@@ -1,0 +1,499 @@
+<!DOCTYPE html><!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" xsl="http://www.w3.org/1999/XSL/Transform xmlns:fb="http://www.facebook.com/2008/fbml""><![endif]--><!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" xsl="http://www.w3.org/1999/XSL/Transform xmlns:fb="http://www.facebook.com/2008/fbml""> <![endif]--><!--[if IE 8]><html class="no-js lt-ie9" xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fb="http://www.facebook.com/2008/fbml"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:scr="urn:scr.this"><!--<![endif]--><head><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><meta name="verify-v1" content="jKqgZt8qtZUt+IrazV2fydKUZG2KKR8QEUoYjH9tth4=" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info = {"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"d527718953","applicationID":"90967276","transactionName":"bwBbMhBWVkYFV0RbClZKdDAhGHlHEF1TXgBLJlYIFkVXWQhRQh0hXRFYDw5E","queueTime":0,"applicationTime":83,"agent":"","atts":""}</script><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1099.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Drawing Primitives in OpenGL | OpenGL Primitives | InformIT</title><link href="/display/InformIT/css/style-blessed1.css" rel="stylesheet" type="text/css" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><link href="/display/InformIT/css/style.css" rel="stylesheet" type="text/css" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><link href="/display/common/css/print.css" rel="stylesheet" media="print" type="text/css" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/display/InformIT/images/objects/touch_icons/apple-touch-icon-144x144-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/display/InformIT/images/objects/touch_icons/apple-touch-icon-114x114-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/display/InformIT/images/objects/touch_icons/apple-touch-icon-72x72-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><link rel="apple-touch-icon-precomposed" href="/display/InformIT/images/objects/touch_icons/apple-touch-icon-precomposed.png" xmlns:msxsl="urn:schemas-microsoft-com:xslt" /><script language="JavaScript" src="/display/common/javascript/modernizr.custom.js?v=20181009" type="text/javascript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="/display/common/javascript/jquery.js?v=20181009" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="/display/common/javascript/global.js?v=20181009" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><!--[if lte IE 8]><script language="JavaScript" src="/display/common/javascript/respond.min.js" type="text/JavaScript"></script><![endif]--><script language="JavaScript" src="/display/common/javascript/swfobject.js" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="/display/common/javascript/jquery-ui-1.12.0.custom.min.js" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><script language="JavaScript" src="/display/common/javascript/fastclick.min.js" type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt"></script><link rel="canonical" href="http://www.informit.com/articles/article.aspx?p=461848" />
+            
+            <link rel="next" href="http://www.informit.com/articles/article.aspx?p=461848&seqNum=2" />
+        
+                <meta name="pageType" content="Articles and Sample Chapters" />
+            <meta name="publishedDate" content="May 12, 2006" />
+                <meta name="description" content="Computer-generated animation in film and television, as well as state-of-the-art video games, features realistic water, fire, and other natural effects. Many people new to computer graphics are astounded to learn that these realistic and complex models are simple triangles and pixels as far as computer graphics hardware is concerned. In this chapter, OpenGL&#174; Distilled covers the OpenGL primitive types and how to control their appearance with several basic rendering features." />
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+            
+        <link rel="shortcut icon" href="/display/InformIT/images/objects/favicon.ico?v=20181009" /><script xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+          (function(d){
+            var e=d.createElement('script');
+            e.src='https://td.yieldify.com/yieldify/code.js?w_uuid=319c38ba-d8c1-4c13-ad45-545e025f89d3&k=1&loca='+window.location.href;
+            e.async=true;
+            d.getElementsByTagName('head')[0].appendChild(e);
+          }(document));
+      </script><script xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+      (function() {
+          var _fbq = window._fbq || (window._fbq = []);
+          if (!_fbq.loaded) {
+              var fbds = document.createElement('script');
+              fbds.async = true;
+              fbds.src = '//connect.facebook.net/en_US/fbds.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(fbds, s);
+              _fbq.loaded = true;
+          }
+          _fbq.push(['addPixelId', '730048657068506']);
+      })();
+      
+      window._fbq = window._fbq || [];
+      window._fbq.push(['track', 'PixelInitialized', {}]);
+    </script><noscript xmlns:msxsl="urn:schemas-microsoft-com:xslt"><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=730048657068506&amp;ev=PixelInitialized" /></noscript><script>
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-594Q94P');
+      </script></head><input id="partner-int-id" type="hidden" value="53" /><body class="r site-wide"><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-594Q94P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="strap" class="sitewide"><div class="cranium block-sunshine-yellow">
+  <div id="sitewidestrap" role="complementary" aria-describedby="sitewide-promodesc-g348" aria-labelledby="sitewide-promotitle-g348" class="strap-marketing sixteen columns alpha omega clearfix">
+    <p id="sitewide-promotitle-g348" class="strap-marketing-heading">EVERYDAY DISCOUNT OFFER</p>
+    <p id="strap-marketing-control" class="strap-marketing-p">Buy 3 or more eligible titles and save 40%*&mdash;use code <strong>BUY3</strong>. <a href="/store/index.aspx?utm_source=site&utm_medium=strap&utm_campaign=buy3">Shop now.</a></p>
+  </div>
+</div></div><div class="wrapper">
+
+<div id="rContent" class="articleProduct content clearfix">
+<p class="crumb">
+            <a href="/">Home</a>
+            &gt;
+            <a href="/articles/index.aspx">Articles</a>
+            &gt;
+            <a href="/articles/index.aspx?st=60206">Programming</a>
+            &gt;
+            <a href="/articles/index.aspx?st=60188">Graphic Programming</a>
+</p>
+    <div id="columnOne" class="ten columns alpha rFull">
+        <div id="articleContent" class="clearfix">
+            <div id="articleHeader" class="clearfix">
+                    <h1>Drawing Primitives in OpenGL</h1>
+                                <ul class="list-article-author">
+                        <li class="authorName"> By <a rel="author" href="/authors/bio/8ce63195-7a5b-49de-a96f-87549ff6ce62">Paul Martz</a></li>
+                    <li>May 12, 2006</li>
+                </ul>
+            </div>
+            <div class="articleTools clearfix box">
+                    <div id="articleTOC">
+                        <p>
+                            <a href="#" class="TOC"><span class="ss-icon">&#x1F4C4;</span> <span class="linkText">Contents</span></a>
+                        </p>
+                        <div id="articleTOCList" class="TOCcontent">
+                            <a class="tocClose ss-icon" href="#">&#x2421;</a>                        
+                            <ol>
+                                            <li class="currentPageInfo">
+                                                OpenGL Primitives
+                                            </li>
+                                            <li>
+                                                <a href="/articles/article.aspx?p=461848&amp;seqNum=2">Specifying Vertex Data</a>
+                                            </li>
+                                            <li>
+                                                <a href="/articles/article.aspx?p=461848&amp;seqNum=3">Drawing Details</a>
+                                            </li>
+                                            <li>
+                                                <a href="/articles/article.aspx?p=461848&amp;seqNum=4">Performance Issues</a>
+                                            </li>
+                                            <li>
+                                                <a href="/articles/article.aspx?p=461848&amp;seqNum=5">More Information</a>
+                                            </li>
+                                            <li>
+                                                <a href="/articles/article.aspx?p=461848&amp;seqNum=6">References</a>
+                                            </li>
+                            </ol>                            
+                        </div>
+                    </div>
+                <div class="articleInteraction">
+                    <ul>
+                        <li>
+                            <a href="/articles/printerfriendly/461848" title="Print"><span class="ss-icon">&#x2399;</span> <span class="linkText">Print</span></a>
+                        </li>
+                        <li>
+
+<script type="text/javascript">
+    addthis_pub = 'informit';
+    addthis_logo = 'http://www.informit.com/display/InformIT/images/header/informit.png';
+    addthis_logo_background = '596770';
+    addthis_logo_color = '596770';
+    addthis_brand = 'informIT';
+    addthis_options = 'email, delicious, digg, facebook, google, newsvine, reddit, slashdot, stumbleupon, technorati, twitter, more';
+</script>
+<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><span class="ss-icon">&#x002B;</span> <span class="linkText">Share This</span></a>
+<script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
+                        </li>
+                    </ul>
+                </div>
+                    <div class="pagination">
+        <span class="paginationLocation"><span class="pagination-bold">Page 1</span><span class="pagination-nodisplay"> of 6</span></span>
+            <a class="paginationNext" href="/articles/article.aspx?p=461848&amp;seqNum=2"><span class="pagination-nodisplay">Next </span>&gt;</a>
+    </div>
+                
+            </div> <!-- end articletools -->
+            <div id="articleText">
+                    <div id="articleLongDescription">Computer-generated animation in film and television, as well as state-of-the-art video games, features realistic water, fire, and other natural effects. Many people new to computer graphics are astounded to learn that these realistic and complex models are simple triangles and pixels as far as computer graphics hardware is concerned. In this chapter, OpenGL® Distilled covers the OpenGL primitive types and how to control their appearance with several basic rendering features.</div>
+                    <div id="articleDescription"></div>
+
+                    <a class="relatedBookLink" href="#">This chapter is from the book <span class="ss-icon">&#xF500;</span></a>
+                    <div class="relatedBook relatedBookWide">
+                        <div class="header">
+                            <h3>This chapter is from the book</h3>
+                        </div>
+                        <div class="productArea clearfix">
+                            <a href="/store/opengl-distilled-9780321336798?w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848"><img src="/ShowCover.aspx?isbn=9780321336798&amp;type=d" alt="OpenGL Distilled" class="product" /></a><a href="/store/opengl-distilled-9780321336798?w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848" class="title">OpenGL Distilled</a>
+                            <br />
+                            <br />
+                            <a href="/store/opengl-distilled-9780321336798?w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848" class="button">Learn More</a>
+                                <a href="/buy.aspx?isbn=9780321336798&w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848" class="buy button"><span class="ss-icon">&#xE500;</span>Buy</a>
+                        </div>
+                    </div>
+                    <div class="relatedBook slide">
+                        <div class="header graydient">
+                            <h3 class="relatedHide">This chapter is from the book</h3>
+                            <h3 class="relatedShow"><a href="#" class="mobileClose">This chapter is from the book <span class="ss-icon">&#xF501;</span></a></h3>
+                        </div>
+                        <div class="productArea graydient clearfix">
+                            <a href="/store/opengl-distilled-9780321336798?w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848"><img src="/ShowCover.aspx?isbn=9780321336798&amp;type=d" alt="OpenGL Distilled" class="product" /></a><a href="/store/opengl-distilled-9780321336798?w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848" class="title">OpenGL Distilled</a>
+                            <br />
+                            <br />
+                            <a href="/store/opengl-distilled-9780321336798?w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848" class="button">Learn More</a>
+                                <a href="/buy.aspx?isbn=9780321336798&w_ptgrevartcl=Drawing+Primitives+in+OpenGL_461848" class="buy button"><span class="ss-icon">&#xE500;</span>Buy</a>
+                        </div>
+                    </div>
+
+                
+
+
+
+
+<p>Computer-generated animation in film and television, as well as state-of-the-art video games, features realistic water, fire, and other natural effects. Many people new to computer graphics are astounded to learn that these realistic and complex models are simple triangles and pixels as far as computer graphics hardware is concerned.</p>
+
+<p>OpenGL is often referred to as a low-level API because of its minimal support for higher-order primitives, data structures such as scene graphs, or support for loading 2D image files or 3D model files. Instead, OpenGL focuses on rendering low-level primitives efficiently and with a variety of basic, yet flexible, rendering features. As a result of this "tools not rules" approach, OpenGL is the preferred low-level API for a variety of middle-ware and applications that feature higher-order primitives, scene graph data structures, and file loaders.</p>
+
+<p>In this chapter, <em>OpenGL<sup>&reg;</sup> Distilled</em> covers the OpenGL primitive types and how to control their appearance with several basic rendering features.</p>
+What You'll Learn
+
+<p>This chapter covers the following aspects of primitive rendering:</p>
+
+<p>Primitive types&#8212;The ten primitive types for rendering point, line, and polygonal primitives.</p>
+
+<p>Buffer objects and vertex arrays&#8212;Generally recognized as the most efficient method for specifying geometry.</p>
+
+<p>Rendering details&#8212;OpenGL commands for hidden surface removal, transparency, and displaying co-planar primitives.</p>
+
+<p>Performance issues&#8212;Some tips to help your application run as efficiently as possible on most OpenGL implementations.</p>
+
+What You Won't Learn
+
+<p>Because this book presents only OpenGL's most essential commands, several aspects of primitive rendering aren't covered in this chapter:</p>
+
+<p>The <strong>
+      <tt>glBegin</tt>
+   </strong>
+   <tt>()/</tt>
+   <strong>
+      <tt>glEnd</tt>
+   </strong>
+   <tt>()</tt> paradigm&#8212;<em>OpenGL<sup>&reg;</sup> Distilled</em> covers the <strong>
+      <tt>glBegin</tt>
+   </strong>
+   <tt>()/</tt>
+   <strong>
+      <tt>glEnd</tt>
+   </strong>
+   <tt>()</tt> paradigm for illustrative purposes only. Most OpenGL implementations avoid using <strong>
+      <tt>glBegin</tt>
+   </strong>
+   <tt>()/</tt>
+   <strong>
+      <tt>glEnd</tt>
+   </strong>
+   <tt>()</tt> to specify geometry due to its inherent performance issues.</p>
+
+<p>Vertex data&#8212;This chapter covers normal and texture-coordinate data and omits other vertex data, such as vertex attributes (used in vertex shaders), edge flags, and fog coordinates.</p>
+
+<p>Mapping and unmapping buffer objects&#8212;This chapter doesn't discuss the interface for dynamically altering portions of buffer object data.</p>
+
+<p>Evaluators&#8212;OpenGL allows programmers to render implicit curves and surfaces from control points.</p>
+
+<p>Rectangles&#8212;Because you can specify vertices to render any desired shape, this shorthand interface for drawing rectangles in the  plane is rarely used.</p>
+
+<p>Full vertex array functionality&#8212;This book presents a subset of the vertex array interface and doesn't cover interleaved arrays; vertex array data types other than <tt>GL_FLOAT</tt> and <tt>GL_DOUBLE;</tt> and some vertex array rendering commands, such as <strong>
+      <tt>glDrawArrays</tt>
+   </strong>
+   <tt>()</tt>.</p>
+
+<p>This book doesn't cover all features that affect the final color and appearance of rendered geometry, such as fog, stencil, vertex and fragment shaders, and other related features.</p>
+
+
+<p>Though useful in many rendering circumstances, these features aren't essential for OpenGL programming. If your application requires this functionality, see <em>OpenGL<sup>&reg;</sup> Programming Guide</em>, <em>OpenGL<sup>&reg;</sup> Reference Manual</em>, and <em>OpenGL<sup>&reg;</sup> Shading Language</em>.</p>
+
+
+
+
+
+<h2>2.1 OpenGL Primitives</h2>
+
+<p>In OpenGL, applications render primitives by specifying a primitive type and a sequence of vertices with associated data. The primitive type determines how OpenGL interprets and renders the sequence of vertices.</p>
+
+
+
+<h4>2.1.1 Primitive Types</h4>
+
+<p>OpenGL provides ten different primitive types for drawing points, lines, and polygons, as shown in <a href="javascript:popUp('/content/images/chap2_0321336798/elementLinks/02fig01.gif')">Figure 2-1</a>.</p>
+
+<div class="figure">
+   <a href="javascript:popUp('/content/images/chap2_0321336798/elementLinks/02fig01.gif')">
+      <img src="/content/images/chap2_0321336798/elementLinks/th02fig01.gif" alt="02fig01.gif" />
+   </a>
+   <p>
+      <a href="javascript:popUp('/content/images/chap2_0321336798/elementLinks/02fig01.gif')">Figure 2-1</a> OpenGL primitive types.</p>
+</div>
+
+<p>OpenGL interprets the vertices and renders each primitive using the following rules:</p>
+
+<ul>
+   <li>
+      <tt>GL_POINTS</tt>&#8212; Use this primitive type to render mathematical points. OpenGL renders a point for each vertex specified.</li>
+   <li>
+      <tt>GL_LINES</tt>&#8212; Use this primitive to draw unconnected line segments. OpenGL draws a line segment for each group of two vertices. If the application specifies <em>n</em> vertices, OpenGL renders <em>n</em>/2 line segments. If <em>n</em> is odd, OpenGL ignores the final vertex.</li>
+   <li>
+      <tt>GL_LINE_STRIP</tt>&#8212; Use this primitive to draw a sequence of connected line segments. OpenGL renders a line segment between the first and second vertices, between the second and third, between the third and fourth, and so on. If the application specifies <em>n</em> vertices, OpenGL renders <em>n</em>&ndash;1 line segments.</li>
+   <li>
+      <tt>GL_LINE_LOOP</tt>&#8212; Use this primitive to close a line strip. OpenGL renders this primitive like a <tt>GL_LINE_STRIP</tt> with the addition of a closing line segment between the final and first vertices.</li>
+   <li>
+      <tt>GL_TRIANGLES</tt>&#8212; Use this primitive to draw individual triangles. OpenGL renders a triangle for each group of three vertices. If your application specifies <em>n</em> vertices, OpenGL renders <em>n</em>/3 triangles. If <em>n</em> isn't a multiple of 3, OpenGL ignores the excess vertices.</li>
+   <li>
+      <tt>GL_TRIANGLE_STRIP</tt>&#8212; Use this primitive to draw a sequence of triangles that share edges. OpenGL renders a triangle using the first, second, and third vertices, and then another using the second, third, and fourth vertices, and so on. If the application specifies <em>n</em> vertices, OpenGL renders <em>n</em>&ndash;2 connected triangles. If <em>n</em> is less than 3, OpenGL renders nothing.</li>
+   <li>
+      <tt>GL_TRIANGLE_FAN</tt>&#8212; Use this primitive to draw a fan of triangles that share edges and also share a vertex. Each triangle shares the first vertex specified. If the application specifies a sequence of vertices <em>v,</em> OpenGL renders a triangle using <em>v</em>
+      <sub>0</sub>, <em>v</em>
+      <sub>1</sub>, and <em>v</em>
+      <sub>2</sub>; another triangle using <em>v</em>
+      <sub>0</sub>, <em>v</em>
+      <sub>2</sub>, and <em>v</em>
+      <sub>3</sub>; another triangle using <em>v</em>
+      <sub>0</sub>, <em>v</em>
+      <sub>3</sub>, and <em>v</em>
+      <sub>4</sub>; and so on. If the application specifies <em>n</em> vertices, OpenGL renders <em>n</em>&ndash;2 connected triangles. If <em>n</em> is less than 3, OpenGL renders nothing.</li>
+   <li>
+      <tt>GL_QUADS</tt>&#8212; Use this primitive to draw individual convex quadrilaterals. OpenGL renders a quadrilateral for each group of four vertices. If the application specifies <em>n</em> vertices, OpenGL renders <em>n</em>/4 quadrilaterals. If <em>n</em> isn't a multiple of 4, OpenGL ignores the excess vertices.</li>
+   <li>
+      <tt>GL_QUAD_STRIP</tt>&#8212; Use this primitive to draw a sequence of quadrilaterals that share edges. If the application specifies a sequence of vertices <em>v,</em> OpenGL renders a quadrilateral using <em>v</em>
+      <sub>0</sub>, <em>v</em>
+      <sub>1</sub>, <em>v</em>
+      <sub>3</sub>, and <em>v</em>
+      <sub>2</sub>; another quadrilateral using <em>v</em>
+      <sub>2</sub>, <em>v</em>
+      <sub>3</sub>, <em>v</em>
+      <sub>5</sub>, and <em>v</em>
+      <sub>4</sub>; and so on. If the application specifies <em>n</em> vertices, OpenGL renders (<em>n</em>-2)/2 quadrilaterals. If <em>n</em> is less than 4, OpenGL renders nothing.</li>
+   <li>
+      <tt>GL_POLYGON</tt>&#8212; Use <tt>GL_POLYGON</tt> to draw a single filled convex <em>n</em>-gon primitive. OpenGL renders an <em>n</em>-sided polygon, where <em>n</em> is the number of vertices specified by the application. If <em>n</em> is less than 3, OpenGL renders nothing.</li>
+</ul>
+
+<p>For <tt>GL_QUADS, GL_QUAD_STRIP</tt>, and <tt>GL_POLYGON</tt>, all primitives must be both planar and convex. Otherwise, OpenGL behavior is undefined. The GLU library supports polygon tessellation, which allows applications to render filled primitives that are nonconvex or self-intersecting, or that contain holes. See the "gluTess" set of functions in <em>OpenGL<sup>&reg;</sup> Reference Manual</em> for more information.</p>
+
+
+
+<h4>2.1.2 Vertex Sharing</h4>
+
+<p>Note that <tt>GL_LINE_STRIP, GL_LINE_LOOP, GL_TRIANGLE_STRIP, GL_TRIANGLE_FAN</tt>, and <tt>GL_QUAD_STRIP</tt> all share vertices among their component line segments, triangles, and quadrilaterals. In general, you should use these primitives when possible and practical to reduce redundant per-vertex computation.</p>
+
+<p>You could render a two-quadrilateral <tt>GL_QUAD_STRIP</tt> primitive by using <tt>GL_QUADS</tt>, for example. Rendered as a <tt>GL_QUAD_STRIP</tt>, your application would need to send only six unique vertices. The <tt>GL_QUADS</tt> version of this primitive, however, would require eight vertices, two of which are redundant. Passing identical vertices to OpenGL increases the number of per-vertex operations and could create a performance bottleneck in the rendering pipeline.</p>
+
+
+            </div>
+            <div class="articleTools clearfix box">
+                    <div class="pagination">
+        <span class="paginationLocation"><span class="pagination-bold">Page 1</span><span class="pagination-nodisplay"> of 6</span></span>
+            <a class="paginationNext" href="/articles/article.aspx?p=461848&amp;seqNum=2"><span class="pagination-nodisplay">Next </span>&gt;</a>
+    </div>
+
+                <div class="articleInteraction">
+                    <ul>
+                        <li>
+
+<script type="text/javascript">
+    addthis_pub = 'informit';
+    addthis_logo = 'http://www.informit.com/display/InformIT/images/header/informit.png';
+    addthis_logo_background = '596770';
+    addthis_logo_color = '596770';
+    addthis_brand = 'informIT';
+    addthis_options = 'email, delicious, digg, facebook, google, newsvine, reddit, slashdot, stumbleupon, technorati, twitter, more';
+</script>
+<a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><span class="ss-icon">&#x002B;</span> <span class="linkText">Share This</span></a>
+<script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>
+                        </li>
+                        <li class="last">
+                            <a href="#addToWishList" class="jsLoadFrame dialogOpener"><span class="ss-icon">&#x1F516;</span> <span class="linkText">Save To Your Account</span></a>               
+                        </li>
+                    </ul>
+                     <div id="addToWishList" class="dialogBox" title="Save To My Account">
+                         <iframe id="wishListSrc" src="/my_account/addTo.aspx?p=143e6f94-fa1f-400f-a9ac-4788d3013dbb&e=36a06b2c-7e99-4899-8444-c7b36c81c000&t=a&redirectUrl=http://www.informit.com/articles/article.aspx?p=461848&initialLoad=1"></iframe>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div id="columnTwo" class="six columns omega rFull">
+<div id="promotions" class="tabwidget prop">
+	<h3>Related Resources</h3>
+	<ul class="tabs clearfix">
+		<li class="selected"><a href="#" onclick="tabWidget(1,'promotions'); return false;">Store</a></li>
+		<li><a href="#" onclick="tabWidget(2,'promotions'); loadWidget('promotions', 1, '/Related/Articles/461848?stateIntId=60188'); return false;">Articles</a></li>
+		<li><a href="#" onclick="tabWidget(3,'promotions'); loadWidget('promotions', 2, '/Related/Blogs/430637?stateIntId=60188'); return false;">Blogs</a></li>
+	</ul>
+	<div class="container on">
+
+    <div class="buckets-image-51 cf">
+        <div class="productCover">
+            <a href="/store/adobe-animate-cc-classroom-in-a-book-2018-release-9780134852539?w_ptgrevartcl=Adobe+Animate+CC+Classroom+in+a+Book+(2018+release)_2803964">
+                <img src="/ShowCover.aspx?isbn=0134852532&type=e" alt="Adobe Animate CC Classroom in a Book (2018 release)" class="product" />
+            </a>
+        </div>
+
+        <ul class="buckets-list left">
+            <li class="buckets-list-title">
+                <a href="/store/adobe-animate-cc-classroom-in-a-book-2018-release-9780134852539" class="title">
+                    Adobe Animate CC Classroom in a Book (2018 release)
+                </a>
+            </li>
+            <li class="buckets-image-51-author">By <a href="/authors/bio/f1746b26-96e9-4347-91fd-e70373a521a1">Russell Chun</a></li>
+            <li class="buckets-image-51-price">Book $47.99</li>
+        </ul>
+    </div><!--buckets-image-51 -->
+    <div class="buckets-image-51 cf">
+        <div class="productCover">
+            <a href="/store/adobe-illustrator-cc-classroom-in-a-book-2018-release-9780134852492?w_ptgrevartcl=Adobe+Illustrator+CC+Classroom+in+a+Book+(2018+release)_2803282">
+                <img src="/ShowCover.aspx?isbn=0134852494&type=e" alt="Adobe Illustrator CC Classroom in a Book (2018 release)" class="product" />
+            </a>
+        </div>
+
+        <ul class="buckets-list left">
+            <li class="buckets-list-title">
+                <a href="/store/adobe-illustrator-cc-classroom-in-a-book-2018-release-9780134852492" class="title">
+                    Adobe Illustrator CC Classroom in a Book (2018 release)
+                </a>
+            </li>
+            <li class="buckets-image-51-author">By <a href="/authors/bio/3a9ef2b7-657f-4cf0-bec8-ee0fd6fd5c1c">Brian Wood</a></li>
+            <li class="buckets-image-51-price">Book $47.99</li>
+        </ul>
+    </div><!--buckets-image-51 -->
+    <div class="buckets-image-51 cf">
+        <div class="productCover">
+            <a href="/store/adobe-after-effects-cc-classroom-in-a-book-2018-release-9780134853253?w_ptgrevartcl=Adobe+After+Effects+CC+Classroom+in+a+Book+(2018+release)_2803966">
+                <img src="/ShowCover.aspx?isbn=0134853253&type=e" alt="Adobe After Effects CC Classroom in a Book (2018 release)" class="product" />
+            </a>
+        </div>
+
+        <ul class="buckets-list left">
+            <li class="buckets-list-title">
+                <a href="/store/adobe-after-effects-cc-classroom-in-a-book-2018-release-9780134853253" class="title">
+                    Adobe After Effects CC Classroom in a Book (2018 release)
+                </a>
+            </li>
+            <li class="buckets-image-51-author">By <a href="/authors/bio/8dbcb7f0-b524-4291-a9a3-ed0e34a54e54">Lisa Fridsma</a>, <a href="/authors/bio/f8a42d99-94e8-41f8-ba57-bed85ead05a9">Brie Gyncild</a></li>
+            <li class="buckets-image-51-price">Book $47.99</li>
+        </ul>
+    </div><!--buckets-image-51 -->
+    <p class="buckets-see-all">
+        <a href="/store/index.aspx?st=60188">See All Related Store Items</a>
+    </p>
+
+	</div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+</div>
+        
+        
+    </div>
+
+    <script type="text/javascript" src="/display/common/javascript/waypoints.min.js"></script>
+    <script type="text/javascript" src="/display/common/javascript/jquery.fitvids.min.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {    
+            $('#articleText').fitVids();
+            if (document.documentElement.clientWidth > 960) {
+                $('#rContent').waypoint(function() {
+                    $('.relatedBook.slide').slideToggle();
+                    $('.relatedBookLink').slideToggle();
+                }, { offset: -300 }); 
+            } else {
+                console.log('narrow');
+                $('#rContent').waypoint(function() {
+                    $('.relatedBook.slide').slideToggle();
+                    $('.relatedBookLink').slideToggle();
+                }, { offset: -10 }); 
+
+                $('#articleContent').waypoint(function() {
+                    $('.relatedBook.slide').slideToggle();
+                    $('.relatedBookLink').slideToggle();
+                }, { offset: 'bottom-in-view' }); 
+            }
+                          
+            $('.relatedBookLink').on('click touchstart', function() {
+                $('.relatedBookLink').toggleClass('active');
+                $('.relatedBook.slide').toggleClass('active');
+                return false;              
+            });
+            $('.mobileClose').on('click touchstart', function() {
+                $('.relatedBookLink').toggleClass('active');
+                $('.relatedBook.slide').toggleClass('active');
+                return false;              
+            }); 
+            if (!$('.sidebar').children().is('.title, .theholder')) {
+                $('.sidebar').css('padding', '2em 1em 1em 1em');
+            }              
+        });
+    </script>
+</div><div id="header"><div class="cranium"><div class="branding"><div id="hLogo"><a href="/" accesskey="0" title="Home" class="logo"><!--[if lte IE 8]><img src="/display/informIT/images/header/informit.png" alt="InformIT" /><![endif]--></a></div></div><div class="tagline">the trusted technology learning source</div><a href="#menu" class="menu-link ss-icon"></a><div id="headerLinks" class="clearfix">
+                   
+    <div id="cartLink" class="headerLink c">
+        <span class="bighead ss-icon">&#xE500;</span>
+        <a href="https://memberservices.informit.com/cart/buy.aspx?partner=53">
+            <span class="bighead">View </span>Your Cart
+        </a>
+    </div>
+
+    <div class="hi">
+            <a href="https://memberservices.informit.com/my_account/register.aspx?partner=53">Join</a><span>|</span><a href="https://memberservices.informit.com/my_account/login.aspx?partner=53">Sign In</a>
+    </div>
+
+              <form name="headersearchform" id="headersearchform" class="s" method="GET" action="/search/index.aspx" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><label for="headersearchform">Search</label><input onfocus="checkClear(this,'Search');" type="text" name="query" id="query" value="Search" /><input type="submit" id="searchbutton" class="ss-icon" value="🔎" /></form></div></div></div><div id="siteNav"><div class="cranium clearfix"><ul id="nav"><li class="mobile search"><form name="headersearchform" id="headersearchform" class="s" method="GET" action="/search/index.aspx" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><label for="headersearchform">Search</label><input onfocus="checkClear(this,'Search');" type="text" name="query" id="query" value="Search" /><input type="submit" id="searchbutton" class="ss-icon" value="🔎" /></form></li>
+                
+    <li class="mobile">
+        <a href="https://memberservices.informit.com/cart/buy.aspx?partner=53">
+            <span class="ss-icon cart">&#xE500; </span> View Your Cart
+        </a>
+    </li>
+
+    <li class="mobile">
+        <a href="https://memberservices.informit.com/my_account/login.aspx?partner=53">
+            <span class="ss-icon">&#x1F464;</span> Sign In
+        </a>
+    </li>
+    <li class="mobile">
+        <a href="https://memberservices.informit.com/my_account/register.aspx?partner=53">Join</a>
+    </li>
+
+              <li><a class="arrow" href="/store/">Store</a><ul class="column1 sib"><li><a href="/store/index.aspx?st=66374">
+                        Business &amp; Management
+                      </a></li><li><a href="/store/index.aspx?st=60403">Certification</a></li><li><a href="/store/index.aspx?st=98435">
+                        Cloud Computing &amp; Virtualization
+                      </a></li><li><a href="/store/index.aspx?st=60406">Data</a></li><li><a href="/store/index.aspx?st=99185">Digital Photography</a></li><li><a href="/store/index.aspx?st=60390">Engineering</a></li><li><a href="/store/index.aspx?st=60380">
+                        Graphics &amp; Web Design
+                      </a></li><li><a href="/store/index.aspx?st=60356">
+                        Home &amp; Office Computing
+                      </a></li><li><a href="/store/index.aspx?st=60367">Information Technology</a></li></ul><ul class="column2 sib"><li><a href="/store/index.aspx?st=98412">
+                        Mobile Application Development &amp; Programming
+                      </a></li><li><a href="/store/index.aspx?st=60382">Networking</a></li><li><a href="/store/index.aspx?st=67290">Open Source</a></li><li><a href="/store/index.aspx?st=60428">Operating Systems, Server</a></li><li><a href="/store/index.aspx?st=60370">Programming</a></li><li><a href="/store/index.aspx?st=60408">Security</a></li><li><a href="/store/index.aspx?st=66379">
+                        Software Development &amp; Management
+                      </a></li><li><a href="/store/index.aspx?st=66380">Web Development</a></li><li><a href="/store/index.aspx?st=60379">Web Services</a></li></ul></li><li><a class="arrow" href="/formats/">Formats</a><ul><li><a href="/store/browse/books">Books</a></li><li><a href="/store/browse/ebooks">eBooks</a></li><li><a href="/store/browse/practice-tests">Practice Tests</a></li><li><a href="/store/browse/software">Software</a></li><li><a href="/store/browse/video">Video</a></li><li><a href="/store/browse/web-editions">Web Editions</a></li></ul></li><li><a href="/promotions/">Deals &amp; Promotions</a></li><li><a href="/promotions/video-training-for-it-pros-developers-sys-admins-devops-140499">Video Training</a></li><li><a href="https://www.safaribooksonline.com/?utm_source=informit&amp;utm_medium=referral&amp;utm_campaign=publisher&amp;utm_content=global+top+nav">Safari</a></li><li><a class="arrow" href="/imprint/">Imprints</a><ul class="imprints"><li><a href="/imprint/index.aspx?st=61085">Addison-Wesley Professional</a></li><li><a href="http://www.adobepress.com">Adobe Press</a></li><li><a href="http://www.ciscopress.com">Cisco Press</a></li><li><a href="http://www.informit.com/promotions/pearson-ft-press-141135">FT Press</a></li><li><a href="http://www.informit.com/promotions/ibm-press-141142">IBM Press</a></li><li><a href="https://www.microsoftpressstore.com">Microsoft Press Store</a></li><li><a href="http://www.peachpit.com">Peachpit</a></li><li><a href="http://www.pearsonitcertification.com">Pearson IT Certification</a></li><li><a href="/imprint/index.aspx?st=61089">Prentice Hall Professional</a></li><li><a href="http://www.quepublishing.com">Que Publishing</a></li><li><a href="/imprint/index.aspx?st=61091">Sams Publishing</a></li><li><a href="http://www.pearsonitcertification.com/promotions/vmware-press-138356">VMware Press</a></li></ul></li><li><a class="arrow" href="/explore/">Explore</a><ul class="last"><li><a href="/about/">About</a></li><li><a href="/affiliates/">Affiliate Program</a></li><li><a href="/authors/">Authors</a></li><li><a href="/articles/">Chapters &amp; Articles</a></li><li><a href="/about/contact_us/">Contact Us</a></li><li><a href="/promotions/">Deals &amp; Promotions</a></li><li><a href="/promotions/resource-center-directory-140876">Popular Topics</a></li><li><a href="/store/register.aspx">Product Registration</a></li><li><a href="/newsletters/">Special Offers &amp; Newsletter</a></li><li><a href="/promotions/video-training-for-it-pros-developers-sys-admins-devops-140499">Video Training</a></li></ul></li><li><a class="arrow" href="/promotions/informits-community-resource-center-139745">Community</a><ul class="last"><li><a href="/press/">Press and Media Relations</a></li><li><a href="/promotions/share-your-knowledge-and-become-a-community-reviewer-140471">Product Review Team</a></li><li><a href="/user_groups/">User Groups</a></li></ul></li></ul></div></div><div id="footer"><ul class="links"><li><a href="/about/">About</a></li><li><a href="/affiliates/">Affiliates</a></li><li><a href="/about/contact_us/">Contact Us</a></li><li><a href="/about/faq.aspx">FAQ</a></li><li><a href="/about/legal.aspx">Legal Notice</a></li><li><a href="/cart/ordering.aspx">Ordering Information</a></li><li><a href="/about/privacy.aspx">Privacy Notice</a></li><li><a href="/press/">Press</a></li><li><a href="/promotions/">Promotions</a></li><li><a href="/site_map/">Site Map</a></li><li><a href="/about/write_for_us.aspx">Write for Us</a></li></ul><div itemscope="itemscope" itemtype="http://schema.org/Corporation">
+          ©  2018 Pearson Education, <span itemprop="name">Informit</span>. All rights reserved.<br /><div itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress"><span itemprop="streetAddress">221 River Street</span>, <span itemprop="addressLocality">Hoboken</span>, <span itemprop="addressRegion">NJ </span><span itemprop="postalCode">07030</span></div></div></div><div id="strap"><div class="cranium"><div id="pearsonTopLogoLink"></div><div id="pearsonAlwaysLearningImage"></div></div></div><!--Google analytics--><script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
+        { (i[r].q=i[r].q||[]).push(arguments)}
+        ,i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-433761-6', 'auto', {'allowLinker': true});
+        ga('require', 'linker');
+        
+        ga('linker:autoLink', ['www.informit.com', 'memberservices.informit.com']);
+        ga('send', 'pageview');
+      </script><script type="text/JavaScript" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+            setTimeout(function(){var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0018/4148.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+        </script></div></body></html>

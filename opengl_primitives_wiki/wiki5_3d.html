@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 6) & !(IE 7) & !(IE 8)]><!-->
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>
+Rendering Primitives with OpenGL3D Game Engine Programming	</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="https://www.3dgep.com/wp-content/themes/twentyeleven/style.css" />
+<link rel="pingback" href="https://www.3dgep.com/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="https://www.3dgep.com/wp-content/themes/twentyeleven/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<meta name="description" content="Rendering object in OpenGL using immediate mode rendering, vertex arrays, and display lists" />
+<link rel="canonical" href="https://www.3dgep.com/rendering-primitives-with-opengl/" />
+<link rel="publisher" href="https://www.google.com/+3dgep" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Rendering Primitives with OpenGL" />
+<meta property="og:description" content="Rendering object in OpenGL using immediate mode rendering, vertex arrays, and display lists" />
+<meta property="og:url" content="https://www.3dgep.com/rendering-primitives-with-opengl/" />
+<meta property="og:site_name" content="3D Game Engine Programming" />
+<meta property="article:publisher" content="https://www.facebook.com/3DGameEngineProgramming" />
+<meta property="article:tag" content="3D" />
+<meta property="article:tag" content="attributes" />
+<meta property="article:tag" content="C++" />
+<meta property="article:tag" content="display lists" />
+<meta property="article:tag" content="game" />
+<meta property="article:tag" content="immediate mode" />
+<meta property="article:tag" content="OpenGL" />
+<meta property="article:tag" content="Programming" />
+<meta property="article:tag" content="vertex" />
+<meta property="article:tag" content="vertex array" />
+<meta property="article:section" content="Graphics Programming" />
+<meta property="article:published_time" content="2012-01-27T12:47:33+00:00" />
+<meta property="article:modified_time" content="2017-02-21T10:48:38+00:00" />
+<meta property="og:updated_time" content="2017-02-21T10:48:38+00:00" />
+<meta property="og:image" content="https://www.3dgep.com/wp-content/uploads/2012/01/Rendering-Primitives.png" />
+<meta property="og:image:secure_url" content="https://www.3dgep.com/wp-content/uploads/2012/01/Rendering-Primitives.png" />
+<meta property="og:image:width" content="528" />
+<meta property="og:image:height" content="550" />
+<meta property="og:image:alt" content="Rendering Primitives" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Rendering object in OpenGL using immediate mode rendering, vertex arrays, and display lists" />
+<meta name="twitter:title" content="Rendering Primitives with OpenGL" />
+<meta name="twitter:site" content="@3dgep" />
+<meta name="twitter:image" content="https://www.3dgep.com/wp-content/uploads/2012/01/Rendering-Primitives.png" />
+<meta name="twitter:creator" content="@3dgep" />
+<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@type":"Person","url":"https:\/\/www.3dgep.com\/","sameAs":["https:\/\/www.facebook.com\/3DGameEngineProgramming","https:\/\/www.google.com\/+3dgep","https:\/\/twitter.com\/3dgep"],"@id":"#person","name":"Jeremiah van Oosten"}</script>
+
+<link rel='dns-prefetch' href='//maxcdn.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="3D Game Engine Programming &raquo; Feed" href="https://www.3dgep.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="3D Game Engine Programming &raquo; Comments Feed" href="https://www.3dgep.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="3D Game Engine Programming &raquo; Rendering Primitives with OpenGL Comments Feed" href="https://www.3dgep.com/rendering-primitives-with-opengl/feed/" />
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.3.0';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-21362652-4';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-21362652-4', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.3dgep.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='prettyphoto-css' href='https://www.3dgep.com/wp-content/plugins/prettyphoto-media/css/prettyPhoto.css?ver=3.1.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='simple-alert-boxes-css' href='https://www.3dgep.com/wp-content/plugins/simple-alert-boxes/css/simple-alert-boxes.css?ver=1.4' type='text/css' media='all' />
+<link rel='stylesheet' id='sab-fontawesome-css' href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='mt-shcore-style-css' href='https://www.3dgep.com/wp-content/plugins/syntax-highlighter-mt/styles/shCore.css?ver=2.2.5' type='text/css' media='all' />
+<link rel='stylesheet' id='mt-theme-style-css' href='https://www.3dgep.com/wp-content/plugins/syntax-highlighter-mt/styles/shThemeDefault.css?ver=2.2.5' type='text/css' media='all' />
+<link rel='stylesheet' id='toc-screen-css' href='https://www.3dgep.com/wp-content/plugins/table-of-contents-plus/screen.min.css?ver=1509' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.3dgep.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","is_debug_mode":"false","download_extensions":"","inbound_paths":"","home_url":"https:\/\/www.3dgep.com","track_download_as":"event","internal_label":"int","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js?ver=7.3.0'></script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/syntax-highlighter-mt/scripts/shCore.js?ver=2.2.5'></script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/syntax-highlighter-mt/scripts/shAutoloader.js?ver=2.2.5'></script>
+<link rel='https://api.w.org/' href='https://www.3dgep.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.3dgep.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.3dgep.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel='shortlink' href='https://www.3dgep.com/?p=2365' />
+<link rel="alternate" type="application/json+oembed" href="https://www.3dgep.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.3dgep.com%2Frendering-primitives-with-opengl%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.3dgep.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.3dgep.com%2Frendering-primitives-with-opengl%2F&#038;format=xml" />
+<style data-context="foundation-flickity-css">/*! Flickity v2.0.2
+http://flickity.metafizzy.co
+---------------------------------------------- */.flickity-enabled{position:relative}.flickity-enabled:focus{outline:0}.flickity-viewport{overflow:hidden;position:relative;height:100%}.flickity-slider{position:absolute;width:100%;height:100%}.flickity-enabled.is-draggable{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.flickity-enabled.is-draggable .flickity-viewport{cursor:move;cursor:-webkit-grab;cursor:grab}.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down{cursor:-webkit-grabbing;cursor:grabbing}.flickity-prev-next-button{position:absolute;top:50%;width:44px;height:44px;border:none;border-radius:50%;background:#fff;background:hsla(0,0%,100%,.75);cursor:pointer;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.flickity-prev-next-button:hover{background:#fff}.flickity-prev-next-button:focus{outline:0;box-shadow:0 0 0 5px #09f}.flickity-prev-next-button:active{opacity:.6}.flickity-prev-next-button.previous{left:10px}.flickity-prev-next-button.next{right:10px}.flickity-rtl .flickity-prev-next-button.previous{left:auto;right:10px}.flickity-rtl .flickity-prev-next-button.next{right:auto;left:10px}.flickity-prev-next-button:disabled{opacity:.3;cursor:auto}.flickity-prev-next-button svg{position:absolute;left:20%;top:20%;width:60%;height:60%}.flickity-prev-next-button .arrow{fill:#333}.flickity-page-dots{position:absolute;width:100%;bottom:-25px;padding:0;margin:0;list-style:none;text-align:center;line-height:1}.flickity-rtl .flickity-page-dots{direction:rtl}.flickity-page-dots .dot{display:inline-block;width:10px;height:10px;margin:0 8px;background:#333;border-radius:50%;opacity:.25;cursor:pointer}.flickity-page-dots .dot.is-selected{opacity:1}</style><style data-context="foundation-slideout-css">.slideout-menu{position:fixed;left:0;top:0;bottom:0;right:auto;z-index:0;width:256px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}.slideout-menu.pushit-right{left:auto;right:0}.slideout-panel{position:relative;z-index:1;will-change:transform}.slideout-open,.slideout-open .slideout-panel,.slideout-open body{overflow:hidden}.slideout-open .slideout-menu{display:block}.pushit{display:none}</style><link rel="shortcut icon" href="https://3dgep.com/wp-content/uploads/2014/03/favicon.ico" />
+<link rel="icon" href="https://3dgep.com/wp-content/uploads/2014/03/favicon.png" type="image/png" />
+<link rel="icon" href="https://3dgep.com/wp-content/uploads/2014/03/favicon.gif" type="image/gif" />
+<style type="text/css">
+.my-note
+{
+font-size:0.7em;
+background-color:#efefef;
+text-align:justify;
+border-style:solid none solid none;
+border-width:1px;
+margin-bottom: 1.625em;
+}
+
+.unselectable
+{
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+code, kbd, var, cmd
+{
+color: #666;
+font-weight: 700;
+background-color: #f9f2f4;
+border: 1px solid #ddd;
+border-radius: 3px;
+padding: 1px 3px;
+white-space: pre;
+}
+
+cmd
+{
+font: 13px Monaco,Consolas,andale mono,dejavu sans mono,monospace;
+border-radius: 0px;
+color: #fff;
+background-color: #000;
+}
+
+kbd {
+padding:0.1em 0.6em;
+border:1px solid #ccc;
+background-color:#f7f7f7;
+color:#333;
+-moz-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+-webkit-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+border-radius:3px;
+display:inline-block;
+margin:0 0.1em;
+text-shadow:0 1px 0 #fff;
+line-height:1.4;
+}
+
+var
+{
+font-style: italic;
+}
+</style><style>.ios7.web-app-mode.has-fixed header{ background-color: rgba(3,122,221,.88);}</style></head>
+<body class="post-template-default single single-post postid-2365 single-format-standard singular two-column right-sidebar">
+<div id="page" class="hfeed">
+<header id="branding" role="banner">
+<hgroup>
+<h1 id="site-title"><span><a href="https://www.3dgep.com/" rel="home">3D Game Engine Programming</a></span></h1>
+<h2 id="site-description">Helping you build your dream game engine.</h2>
+</hgroup>
+<a href="https://www.3dgep.com/">
+<img src="https://3dgep.com/wp-content/uploads/2011/12/3dgep-banner-1000x288.png" width="1000" height="288" alt="3D Game Engine Programming" />
+</a>
+<form method="get" id="searchform" action="https://www.3dgep.com/">
+<label for="s" class="assistive-text">Search</label>
+<input type="text" class="field" name="s" id="s" placeholder="Search" />
+<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+</form>
+<nav id="access" role="navigation">
+<h3 class="assistive-text">Main menu</h3>
+<div class="skip-link"><a class="assistive-text" href="#content">Skip to primary content</a></div>
+<div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li id="menu-item-928" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-928"><a href="/">Home</a></li>
+<li id="menu-item-932" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-932"><a href="https://www.3dgep.com/category/math/">Math</a></li>
+<li id="menu-item-3703" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3703"><a href="https://www.3dgep.com/category/unity/">Unity</a></li>
+<li id="menu-item-931" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-931"><a href="https://www.3dgep.com/category/graphics-programming/">Graphics Programming</a>
+<ul class="sub-menu">
+<li id="menu-item-2641" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-2641"><a href="https://www.3dgep.com/category/graphics-programming/opengl/">OpenGL</a></li>
+<li id="menu-item-5758" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5758"><a href="https://www.3dgep.com/category/graphics-programming/directx/">DirectX</a></li>
+<li id="menu-item-2659" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2659"><a href="https://www.3dgep.com/category/graphics-programming/cg/">Cg</a></li>
+</ul>
+</li>
+<li id="menu-item-2104" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2104"><a href="https://www.3dgep.com/category/cuda/">CUDA</a></li>
+<li id="menu-item-1568" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1568"><a href="https://www.3dgep.com/about-3d-game-engine-programming/">About</a></li>
+<li id="menu-item-4599" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4599"><a href="https://www.3dgep.com/courses/">Courses</a>
+<ul class="sub-menu">
+<li id="menu-item-4604" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4604"><a href="https://www.3dgep.com/game-engines-1-ge1/">Game Engines 1 (GE1/GEA1)</a></li>
+<li id="menu-item-4602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4602"><a href="https://www.3dgep.com/graphics-programming-3-grp3/">Graphics Programming 3 (GRP3)</a></li>
+<li id="menu-item-4601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4601"><a href="https://www.3dgep.com/graphics-programming-4-grp4/">Graphics Programming 4 (GRP4)</a></li>
+<li id="menu-item-4600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4600"><a href="https://www.3dgep.com/advanced-game-technology-6-agt6/">Advanced Game Technology 6 (AGT6)</a></li>
+</ul>
+</li>
+</ul></div> </nav>
+</header>
+<div id="main">
+<div id="primary">
+<div id="content" role="main">
+<nav id="nav-single">
+<h3 class="assistive-text">Post navigation</h3>
+<span class="nav-previous"><a href="https://www.3dgep.com/cuda-case-study-n-body-simulation/" rel="prev"><span class="meta-nav">&larr;</span> Previous</a></span>
+<span class="nav-next"><a href="https://www.3dgep.com/texturing-and-lighting-in-opengl/" rel="next">Next <span class="meta-nav">&rarr;</span></a></span>
+</nav>
+<article id="post-2365" class="post-2365 post type-post status-publish format-standard has-post-thumbnail hentry category-graphics-programming category-opengl tag-3d tag-attributes tag-c tag-display-lists tag-game tag-immediate-mode tag-opengl tag-programming tag-vertex tag-vertex-array">
+<header class="entry-header">
+<h1 class="entry-title">Rendering Primitives with OpenGL</h1>
+<div class="entry-meta">
+<span class="sep">Posted on </span><a href="https://www.3dgep.com/rendering-primitives-with-opengl/" title="1:47 pm" rel="bookmark"><time class="entry-date" datetime="2012-01-27T13:47:33+00:00">January 27, 2012</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="https://www.3dgep.com/author/jeremiah/" title="View all posts by Jeremiah van Oosten" rel="author">Jeremiah van Oosten</a></span></span> </div>
+</header>
+<div class="entry-content">
+<div id="attachment_2394" style="width: 160px" class="wp-caption alignleft"><a href="https://www.3dgep.com/wp-content/uploads/2012/01/Rendering-Primitives.png"><img src="https://www.3dgep.com/wp-content/uploads/2012/01/Rendering-Primitives-150x150.png" alt="Rendering Primitives" title="Rendering Primitives" width="150" height="150" class="size-thumbnail wp-image-2394" /></a><p class="wp-caption-text">Rendering Primitives</p></div>
+In this article, I will examine multiple methods for rendering primitives in OpenGL. The first method I will look at is using immediate-mode rendering to render simple primitives in 3D. Another method of rending primitives in OpenGL uses vertex arrays. And finally I will also examine the use of display lists to generate a set of render calls that can be executed at another point in time. The reader is expected to have a basic understanding of programming techniques in C++. If you want to know how you can get started with OpenGL, you can refer to my previous article titled <a title="Introduction to OpenGL for Game Programmers" href="https://www.3dgep.com/?p=636" target="_blank">[Introduction to OpenGL]</a>.</p>
+<p><span id="more-2365"></span></p>
+<div style="clear: both;"><div id="toc_container" class="no_bullets"><p class="toc_title">Contents</p><ul class="toc_list"><li><a href="#Introduction"><span class="toc_number toc_depth_1">1</span> Introduction</a></li><li><a href="#OpenGL_States"><span class="toc_number toc_depth_1">2</span> OpenGL States</a></li><li><a href="#Primitives"><span class="toc_number toc_depth_1">3</span> Primitives</a><ul><li><a href="#Vertex_Attributes"><span class="toc_number toc_depth_2">3.1</span> Vertex Attributes</a></li></ul></li><li><a href="#Immediate_Mode"><span class="toc_number toc_depth_1">4</span> Immediate Mode</a></li><li><a href="#Vertex_Arrays"><span class="toc_number toc_depth_1">5</span> Vertex Arrays</a><ul><li><a href="#Client_States"><span class="toc_number toc_depth_2">5.1</span> Client States</a></li><li><a href="#Example_Using_Vertex_Arrays"><span class="toc_number toc_depth_2">5.2</span> Example Using Vertex Arrays</a></li></ul></li><li><a href="#Display_Lists"><span class="toc_number toc_depth_1">6</span> Display Lists</a><ul><li><a href="#Generating_Display_Lists"><span class="toc_number toc_depth_2">6.1</span> Generating Display Lists</a></li><li><a href="#Rendering_the_Display_List"><span class="toc_number toc_depth_2">6.2</span> Rendering the Display List</a></li><li><a href="#Delete_the_Display_List"><span class="toc_number toc_depth_2">6.3</span> Delete the Display List</a></li></ul></li><li><a href="#Conclusion"><span class="toc_number toc_depth_1">7</span> Conclusion</a></li><li><a href="#Video_Lecture"><span class="toc_number toc_depth_1">8</span> Video Lecture</a></li><li><a href="#References"><span class="toc_number toc_depth_1">9</span> References</a></li></ul></div>
+</div>
+<h1><span id="Introduction">Introduction</span></h1>
+<p>The first OpenGL specification (1.0) was introduced in 1998 under control of the <a title="The Khronos Group Inc." href="http://www.khronos.org/" target="_blank">Khronos Group</a>. At this time, OpenGL utilized a fixed-function pipeline that allowed the graphics programmer to communicate with the low-level graphics hardware by invoking OpenGL functions that were defined in the specification. This did not provide a lot of flexibility to the graphics programmer and it was difficult to achieve exactly the effect that was desired.</p>
+<p>In 2004, the OpenGL 2.0 specification was released which added the programmable shader pipeline, giving the graphics programmer the ability to write custom vertex processing programs as well as pixel processing programs. These custom programs could implement different methods to transform vertices and shade pixels that was not previously possible using only the fixed-function pipeline.</p>
+<p>In 2009, the <a href="http://www.opengl.org/registry/doc/glspec32.core.20091207.pdf" title="OpenGL 3.2 Core Specification" target="_blank">OpenGL 3.2 specification</a> introduced an additional programmable shader type called the geometry shader. This shader allows vertices to be introduced into the rendering pipeline on-the-fly to perform operations like adding complexity to spline curves for better approximation of an otherwise inaccurate curve.</p>
+<p>In 2010, the <a href="http://www.opengl.org/registry/doc/glspec40.core.20100311.pdf" title="OpenGL 4.0 core specification" target="_blank">OpenGL 4.0 specification</a> added two additional programmable shader stages. The tessellation control shaders operate on input patches from the application and produce per-vertex and per-patch output attributes for a new output patch. The tessellation evaluation shaders are used to compute the position and attributes of each vertex produced by the tessellator. Refer to the <a href="http://www.opengl.org/registry/specs/ARB/tessellation_shader.txt" title="ARB_tessellation_shader" target="_blank">ARB_tessellation_shader</a> specification for more information.</p>
+<p>In this article, I will only introduce methods that use the fixed-function pipeline to generate 3D images. The programmable shader pipeline will be introduced in later articles.</p>
+<p>It is important to keep in mind that some of the techniques used here are deprecated in the latest OpenGL specification but I feel it is important to understand where we have come from in order to know how we got to where we are today and where we will go in the future.</p>
+<h1><span id="OpenGL_States">OpenGL States</span></h1>
+<p>OpenGL is implemented internally as a state machine. State can be anything from the current vertex color, the current texture that will be applied to a primitive, light and material states, fog, currently bound buffers, or render targets, etcetera. Each state value can be modified, and the current state can also be queried.</p>
+<p>Boolean states can be enabled using the <strong>glEnable</strong> method and disabled using the <strong>glDisable</strong> method. By default all OpenGL boolean states have the value <strong>GL_FALSE</strong> (except for <strong>GL_DITHER</strong> and <strong>GL_MULTISAMPLE</strong> which have a default value of <strong>GL_TRUE</strong>). A few of the important states to know about are:</p>
+<ul>
+<li><strong>GL_DEPTH_TEST</strong>: If enabled, do depth comparisons and update the depth buffer. Note that even if the depth buffer exists and the depth mask is non-zero, the depth buffer is not updated if the depth test is disabled.</li>
+<li><strong>GL_CULL_FACE</strong>: If enabled, cull polygons based on their winding in window coordinates. The default winding order of front-facing polygons is counter-clockwise.</li>
+</ul>
+<p>There are more important states but they will be discussed in the article about texturing and lighting.</p>
+<p>OpenGL state values can be queried using <strong>glIsEnabled</strong> or the <strong>glGet</strong> family of functions. For example, to query the currently specified color you would use the following function:</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:1;">// The stored color is always 4 components even if 
+// we are only concerned with the red, green, and blue components.
+GLfloat currentColor[4];
+glGetFloatv( GL_CURRENT_COLOR, currentColor );
+</pre>
+</div>
+<p>There are also functions to query the state of boolean parameters using <strong>glGetBooleanv</strong> and in this case the returned parameter will be either <strong>GL_FALSE</strong> for any value that is 0 and <strong>GL_TRUE</strong> for any value that is anything other than 0.</p>
+<p>To query integer, or double state parameters, you would use the <strong>glGetIntegerv</strong>, or <strong>glGetDoublev</strong> methods. </p>
+<h1><span id="Primitives">Primitives</span></h1>
+<p>Before we begin with the rendering code, I want to make a formal definition of what a &#8220;primitive&#8221; is in OpenGL. OpenGL has support for 10 different primitive types. </p>
+<p>When we use immediate mode to draw primitives, we always begin our primitive list with a call to <strong>glBegin</strong> and our primitive list is always terminated with a call to <strong>glEnd</strong>. The parameter that is passed to <strong>glBegin</strong> determines the type of primitive we want to draw and it can be one of the following values:</p>
+<ul>
+<li><strong>GL_POINTS</strong> treats each vertex as a point that will be rendered to the screen. Points will always be drawn the same size irrelevant of their distance to the camera determined by the value specified by the <strong>glPointSize(GLfloat size)</strong> method. The standard size for points is 1.</li>
+<li><strong>GL_LINES</strong> treats each pair of vertices as separate line segments. You must specify at least 2 vertices for a line to be drawn.</li>
+<li><strong>GL_LINE_STRIP</strong> will draw an open connected series of lines where each vertex is connected by a line segment. The last vertex specified will not be automatically connected to the first vertex.</li>
+<li><strong>GL_LINE_LOOP</strong> will draw a closed connected series of lines where each vertex is connected by a line segment. The last vertex will be automatically connected to the first vertex in the list.</li>
+<li><strong>GL_TRIANGLES</strong> treats each triple set of vertices as a single triangle. Individual triangle primitives will not be connected.</li>
+<li><strong>GL_TRIANGLE_STRIP</strong></li>
+<p>will draw a connected group of triangles. For each additional vertex after the 3rd, the triangle is closed by adding an edge from the <img src="https://www.3dgep.com/cgi-bin/mathtex.cgi?n^{th}" style="float:top;" border="0px" /> to the <img src="https://www.3dgep.com/cgi-bin/mathtex.cgi?(n-2)^{th}" style="float:top;" border="0px" /> vertex.</p>
+<li><strong>GL_TRIANGLE_FAN</strong> is useful for drawing circles with any number of vertices where the first vertex is the central vertex that is used to connect all additional vertices in the list.</li>
+<li><strong>GL_QUADS</strong> is used to draw a set of separated quadrilaterals (4-vertex polygons).</li>
+<li><strong>GL_QUAD_STRIP</strong> is used to draw a set of connected quadrilaterals.</li>
+<li><strong>GL_POLYGON</strong> is used to draw a closed (convex) polygon from any number of vertices.</li>
+</ul>
+<p>An example of using each primitive type is shown in the image below.</p>
+<div id="attachment_765" style="width: 610px" class="wp-caption alignnone"><a href="https://www.3dgep.com/wp-content/uploads/2011/02/OpenGL-Primitives.png"><img class="size-full wp-image-765" title="OpenGL Primitive Types" src="https://www.3dgep.com/wp-content/uploads/2011/02/OpenGL-Primitives.png" alt="OpenGL Primitive Types" width="600" height="300" srcset="https://www.3dgep.com/wp-content/uploads/2011/02/OpenGL-Primitives.png 600w, https://www.3dgep.com/wp-content/uploads/2011/02/OpenGL-Primitives-300x150.png 300w" sizes="(max-width: 600px) 100vw, 600px" /></a><p class="wp-caption-text">OpenGL Primitive Types</p></div>
+<h2><span id="Vertex_Attributes">Vertex Attributes</span></h2>
+<p>At a minimum, a primitive must consists of at least one vertex. A vertex defines a point in 2D or 3D space relative to the current reference frame. A vertex can also define a number of attributes that will effect the way the vertex is rendered to the screen. In the fixed-function pipeline a number of functions are defined that affect the different vertex attributes. </p>
+<p>A few of the more commonly used attributes are:</p>
+<ul>
+<li><strong>Color</strong>: A 3- or 4-component color that represents the red, green, blue, and in the case of 4-component colors, the alpha channels of the vertex that is to be drawn.</li>
+<li><strong>Normal</strong>: A 3-component vector that represents the surface normal of the vertex that is to be drawn. The normal is necessary to compute correct lighting information for a particular vertex.</li>
+<li><strong>Texture Coordinate</strong>: A 1-, 2-, 3-, or 4-component value that represents the texel that is used to apply the currently bound texture to the vertex that is to be drawn.</li>
+</ul>
+<p>There are a few more attributes that can be applied to vertices in the fixed-function pipeline, but these are the most common. In this article I will only apply the color attribute while the normal and texture coordinates will be shown in a later article.</p>
+<p>It is important to understand the order in which the attributes must be applied to a vertex.<br />
+You must first specify the attributes using the <strong>glNormal</strong>, <strong>glColor</strong>, and <strong>glTexCoord</strong> and then finally define the current vertex using the <strong>glVertex</strong> family of functions. I will describe and demonstrate these functions in more detail later in the article.</p>
+<p>It is also important to understand that once an attribute is set using the <strong>glColor</strong>, <strong>glNormal</strong>, or <strong>glTexCoord</strong> method, that attribute will remain active for all subsequent vertices that are rendered until it is explicitly changed.</p>
+<h1><span id="Immediate_Mode">Immediate Mode</span></h1>
+<p>When rendering in immediate mode you are required to enclose all of the render calls between matching <strong>glBegin</strong> and <strong>glEnd</strong> function calls. You can only use a subset of the methods that are available in OpenGL after calling <strong>glBegin</strong> and before calling <strong>glEnd</strong>. This subset of functions include setting vertex attributes (<strong>glColor</strong>, <strong>glNormal</strong>, <strong>glTexCoord</strong>, etcetera), setting material properties using <strong>glMaterial</strong>, rendering display lists with <strong>glCallList</strong> family of functions, and vertex plotting with <strong>glVertex</strong>.</p>
+<p>An example of rendering a cube using immediate rendering mode is shown below:</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:1;">    // Render a cube
+    glBegin( GL_QUADS );
+        // Top face
+        glColor3f(   0.0f, 1.0f,  0.0f );  // Green
+        glVertex3f(  1.0f, 1.0f, -1.0f );  // Top-right of top face
+        glVertex3f( -1.0f, 1.0f, -1.0f );  // Top-left of top face
+        glVertex3f( -1.0f, 1.0f,  1.0f );  // Bottom-left of top face
+        glVertex3f(  1.0f, 1.0f,  1.0f );  // Bottom-right of top face
+
+        // Bottom face
+        glColor3f(   1.0f,  0.5f,  0.0f ); // Orange
+        glVertex3f(  1.0f, -1.0f, -1.0f ); // Top-right of bottom face
+        glVertex3f( -1.0f, -1.0f, -1.0f ); // Top-left of bottom face
+        glVertex3f( -1.0f, -1.0f,  1.0f ); // Bottom-left of bottom face
+        glVertex3f(  1.0f, -1.0f,  1.0f ); // Bottom-right of bottom face
+
+        // Front face
+        glColor3f(   1.0f,  0.0f, 0.0f );  // Red
+        glVertex3f(  1.0f,  1.0f, 1.0f );  // Top-Right of front face
+        glVertex3f( -1.0f,  1.0f, 1.0f );  // Top-left of front face
+        glVertex3f( -1.0f, -1.0f, 1.0f );  // Bottom-left of front face
+        glVertex3f(  1.0f, -1.0f, 1.0f );  // Bottom-right of front face
+
+        // Back face
+        glColor3f(   1.0f,  1.0f,  0.0f ); // Yellow
+        glVertex3f(  1.0f, -1.0f, -1.0f ); // Bottom-Left of back face
+        glVertex3f( -1.0f, -1.0f, -1.0f ); // Bottom-Right of back face
+        glVertex3f( -1.0f,  1.0f, -1.0f ); // Top-Right of back face
+        glVertex3f(  1.0f,  1.0f, -1.0f ); // Top-Left of back face
+
+        // Left face
+        glColor3f(   0.0f,  0.0f,  1.0f);  // Blue
+        glVertex3f( -1.0f,  1.0f,  1.0f);  // Top-Right of left face
+        glVertex3f( -1.0f,  1.0f, -1.0f);  // Top-Left of left face
+        glVertex3f( -1.0f, -1.0f, -1.0f);  // Bottom-Left of left face
+        glVertex3f( -1.0f, -1.0f,  1.0f);  // Bottom-Right of left face
+
+        // Right face
+        glColor3f(   1.0f,  0.0f,  1.0f);  // Violet
+        glVertex3f(  1.0f,  1.0f,  1.0f);  // Top-Right of left face
+        glVertex3f(  1.0f,  1.0f, -1.0f);  // Top-Left of left face
+        glVertex3f(  1.0f, -1.0f, -1.0f);  // Bottom-Left of left face
+        glVertex3f(  1.0f, -1.0f,  1.0f);  // Bottom-Right of left face
+    glEnd();
+</pre>
+</div>
+<p>We begin the drawing by calling <strong>glBegin</strong> with <strong>GL_QUADS</strong> as the primitive type.</p>
+<p>We fist specify the color that will be applied to the vertex using <strong>glColor3f</strong> and specify a 3-component floating-point color value. The first face is rendered with the color green.</p>
+<p>Since we are using quads, we need need to specify 4 vertices to define one quad (one face of the cube). We use <strong>glVertex3f</strong> to define a 3-component vertex with floating-point values.</p>
+<p>We repeat this process for each face of the cube, changing the color of each face using <strong>glColor3f</strong>.</p>
+<p>Every call to <strong>glBegin</strong> must be matched by a single call to <strong>glEnd</strong>. This tells OpenGL that we are finished drawing the shape and the image is sent to the GPU for rasterization.</p>
+<p>We should get something similar to what is shown below.</p>
+<div style="width: 590px" class="wp-caption alignnone">
+<iframe scrolling="no" style="width:100%;min-height:380px" src="https://www.3dgep.com/demos/rotating_cube_flat_shading.html"></iframe><br />
+<p class="wp-caption-text">Immediate Mode Rendering</p></div>
+<div class="my-note">It should be noted that as of OpenGL 3.0, the immediate rendering mode has been deprecated but will still work to support backwards compatibility with older software. I do not recommend using immediate mode for rendering complex scenes because of it&#8217;s extremely poor performance.
+</div>
+<h1><span id="Vertex_Arrays">Vertex Arrays</span></h1>
+<p>Another method of rendering objects in OpenGL is using vertex arrays. Using vertex arrays is more efficient than using immediate mode because you don&#8217;t need to call a method to plot every vertex. Vertex arrays allow you to specify a pointer to an array that defines the vertex attributes (color, normal, texture coordinate, etc.) and also a pointer to an array that defines the vertices. You can either specify a different array for every vertex attribute and the vertex positions, or you can interleave the data in the array so that both the vertex attributes and vertex positions are defined in the same array.</p>
+<div id="attachment_2378" style="width: 944px" class="wp-caption alignnone"><a href="https://www.3dgep.com/wp-content/uploads/2012/01/Vertex-Arrays.png"><img src="https://www.3dgep.com/wp-content/uploads/2012/01/Vertex-Arrays.png" alt="Vertex Arrays" title="Vertex Arrays" width="934" height="537" class="size-full wp-image-2378" srcset="https://www.3dgep.com/wp-content/uploads/2012/01/Vertex-Arrays.png 934w, https://www.3dgep.com/wp-content/uploads/2012/01/Vertex-Arrays-300x172.png 300w, https://www.3dgep.com/wp-content/uploads/2012/01/Vertex-Arrays-500x287.png 500w" sizes="(max-width: 934px) 100vw, 934px" /></a><p class="wp-caption-text">Vertex Arrays</p></div>
+<p>The image above shows two ways the vertex arrays can be used. The packed arrays only define a single attribute and the vertex positions in separate arrays. Using interleaved arrays, both the attributes and the vertex positions can be defined in the same array. I will show how to use vertex arrays using interleaved arrays.</p>
+<p>Using vertex arrays, OpenGL requires that we give OpenGL a pointer to the array that defines the attributes and vertex positions. Then we enable the client states that are associated with each attribute and vertex positions. Then we tell OpenGL to draw a primitives using these arrays. And finally, we disable the client states which returns OpenGL back to the normal rendering mode.</p>
+<h2><span id="Client_States">Client States</span></h2>
+<p>OpenGL is originally designed with a client-server model in mind. This was useful because dedicated rendering hardware was very expensive and it was much more economical to purchase just a single rendering machine that several &#8220;clients&#8221; could access to perform rendering jobs.</p>
+<p>For this reason, we have this concept of &#8220;client-state&#8221; which refers to the data that resides in the client&#8217;s environment (system memory). In order to render the client&#8217;s data, it would need to be transferred over the network to the rendering server. </p>
+<p>In today&#8217;s modern age, almost every commercial computer device (PC, laptop, gaming console) has a hardware accelerated graphics processing unit (GPU) available on the same machine that is running the client application, so this terminology is somewhat out-of-date.</p>
+<p>Before OpenGL will use a client state it must be enabled using the <strong>glEnableClientState</strong> method. This method accepts a single parameter that defines the client state that is to be enabled. In this example, I will enable two client-side arrays: <strong>GL_COLOR_ARRAY</strong> and <strong>GL_VERTEX_ARRAY</strong>.</p>
+<p>With the client state enabled, we must also specify the location of the client-side data as well as it&#8217;s type. To do this, we will use the <strong>glColorPointer</strong> method to assign a pointer to the vertex&#8217;s color attribute and the <strong>glVertexPointer</strong> method to assign the vertex positions.</p>
+<p>The <strong>glColorPointer</strong> and <strong>glVertexPointer</strong> methods also need to know the type of data that is contained in these arrays. </p>
+<p>The <strong>glVertexPointer</strong> method has the following signature:</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:1;">void glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *array );
+</pre>
+</div>
+<p>And the <strong>glColorPointer</strong> method has the following signature:</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:1;">void glColorPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *array );
+</pre>
+</div>
+<p>Where:</p>
+<ul>
+<li><strong>GLint size</strong>: Specifies the number of components in a single vertex position. This value must be 2, 3, or 4.</li>
+<li><strong>GLenum type</strong>: Specifies the data type of each component in the array. This value can be one of the symbolic constants <strong>GL_SHORT</strong>, <strong>GL_INT</strong>, <strong>GL_FLOAT</strong>, or <strong>GL_DOUBLE</strong>.</li>
+<li><strong>GLsizei stride</strong>: Specifies the offset in bytes between consecutive vertices. This value can be 0 in which case the array is considered to be packed.</li>
+<li><strong>const GLvoid *array</strong>: Specifies a pointer to the first component of the first vertex in an array.</li>
+</ul>
+<h2><span id="Example_Using_Vertex_Arrays">Example Using Vertex Arrays</span></h2>
+<p>To use client-side vertex arrays, we first need to specify the array data:</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:16;" title="main.cpp">// 3-component floating-point value.
+struct float3
+{
+    float3( float _x = 0.0f, float _y = 0.0f, float _z = 0.0f ) 
+        : x(_x), y(_y), z(_z) {}
+    
+    float x;
+    float y;
+    float z;
+};
+
+// Vertex definition
+struct VertexXYZColor
+{
+    float3 m_Pos;
+    float3 m_Color;
+};
+
+// Define the 8 vertices of a unit cube
+VertexXYZColor g_Vertices[8] = {
+    { float3(  1,  1,  1 ), float3( 1, 1, 1 ) }, // 0
+    { float3( -1,  1,  1 ), float3( 0, 1, 1 ) }, // 1
+    { float3( -1, -1,  1 ), float3( 0, 0, 1 ) }, // 2
+    { float3(  1, -1,  1 ), float3( 1, 0, 1 ) }, // 3
+    { float3(  1, -1, -1 ), float3( 1, 0, 0 ) }, // 4
+    { float3( -1, -1, -1 ), float3( 0, 0, 0 ) }, // 5
+    { float3( -1,  1, -1 ), float3( 0, 1, 0 ) }, // 6
+    { float3(  1,  1, -1 ), float3( 1, 1, 0 ) }, // 7
+};
+</pre>
+</div>
+<p>The vertex defines both the position and color using an interleaved array. We only define the unique vertices of our unit cube but in order to be rendered correctly, we must specify a total of 24 vertices (4 vertices for each face of the cube when rendered using <strong>GL_QUADS</strong> primitives). To reduce the number of duplicate vertices we will use an index array that defines the indices of each vertex in the vertex array that are needed to render the cube. An index array is simply an array of unsigned integers that define the index of each vertex in the vertex array.</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:46;" title="main.cpp">// Define the vertex indices for the cube.
+GLuint g_Indices[24] = {
+    0, 1, 2, 3,                 // Front face
+    7, 4, 5, 6,                 // Back face
+    6, 5, 2, 1,                 // Left face
+    7, 0, 3, 4,                 // Right face
+    7, 6, 1, 0,                 // Top face
+    3, 2, 5, 4,                 // Bottom face
+};
+</pre>
+</div>
+<p>The order of the vertices is important. As an optimization, it is possible to instruct OpenGL not to render polygon faces that are pointing away from the viewer. By default, the winding order of front-facing polygons is counter-clockwise (this can be specified using the <strong>glFrontFace</strong> method). So in this example, I specify the order of vertices so that each face has a counter-clockwise winding order so only back facing polygons will be culled. I explain the winding order in more detail on the article about particle systems [<a href="https://www.3dgep.com/?p=1057" title="Simulating Particle Effects using OpenGL">here</a>]
+<p>To render this object we must specify the pointer to the first element in the arrays and render the object using an index buffer.</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:626;" title="main.cpp">void RenderScene5()
+{
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+
+    glEnable( GL_DEPTH_TEST );
+
+    glTranslatef( 0, 0, -6.0f );                     // Translate back 6 units
+    glRotatef(g_fRotate1, 1.0f, 1.0f, 1.0f );        // Rotate on all 3 axis
+
+    glEnableClientState( GL_COLOR_ARRAY );
+    glEnableClientState( GL_VERTEX_ARRAY );
+
+    glColorPointer( 3, GL_FLOAT, sizeof(VertexXYZColor), &(g_Vertices[0].m_Color) );
+    glVertexPointer( 3, GL_FLOAT, sizeof(VertexXYZColor), &(g_Vertices[0].m_Pos) );
+
+    glDrawElements( GL_QUADS, 24, GL_UNSIGNED_INT, &g_Indices[0] );
+
+    glDisableClientState( GL_COLOR_ARRAY );
+    glDisableClientState( GL_VERTEX_ARRAY );
+}
+</pre>
+</div>
+<p>First, we reset the current model-view matrix by loading an identity matrix with <strong>glLoadIdentity()</strong>. On line 633, we use the <strong>glTranslatef</strong> method to move the origin of the world back 6 units in the Z-axis. The <strong>glRotatef</strong> will rotate origin of the world a certain number of degrees along the specified axis.</p>
+<p>On line 636 and 637, we enable the color and vertex position client states. This indicates to OpenGL that will will specify client data to these properties.</p>
+<p>The pointers to the vertex arrays are defined on line 639, and 640 using the <strong>glColorPointer</strong> and <strong>glVertexPointer</strong> methods described earlier.</p>
+<p>Since we also have an index buffer that defines the order in which the vertices defined in the vertex buffer should be drawn, we use the <strong>glDrawElements</strong> method to draw indexed vertices. If our vertex array defines all 24 vertices in order (including the duplicated ones) then we could use the <strong>glDrawArrays</strong> instead.</p>
+<p>If we are finished with those arrays, we should not forget to disable the client states again so that OpenGL is rendering normally again.</p>
+<p>When we run the demo, we should see something similiar to what is shown below:</p>
+<div style="width: 590px" class="wp-caption alignnone">
+<iframe scrolling="no" style="width:100%;min-height:380px" src="https://www.3dgep.com/demos/rotating_cube_smooth_shading.html"></iframe><br />
+<p class="wp-caption-text">Vertex Array Rendering</p></div>
+<div class="my-note">
+As of OpenGL 3.0, client state vertex arrays are also deprecated in favor of vertex buffer objects. Vertex buffer objects (VBO&#8217;s) will be described in the article about OpenGL extensions.
+</div>
+<h1><span id="Display_Lists">Display Lists</span></h1>
+<p>The final method to render objects to the screen I want to discuss is display lists. A display list can be thought of as a list of OpenGL render instructions that can be compiled at run-time and then invoked over and over again very quickly. Display lists come in handy when you want to define a static shape (you cannot modify the vertices in a display list directly) and render that shape many times without having to recompute the vertices.</p>
+<p>Before you can use a display list, you must generate a unique display list object ID using the <strong>glGenLists</strong> method. This method takes as it&#8217;s only argument a <strong>GLsizei</strong> parameter which defines the number of contiguous display lists to generate.</p>
+<p>Display lists are deleted using the <strong>glDeleteLists</strong> method.</p>
+<p>To tell OpenGL that we want to define the instructions that are compiled into the display list, we use the <strong>glNewList</strong> and end the display list definition with the <strong>glEndList</strong> command.</p>
+<p>The <strong>glNewList</strong> has the following signature:</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:1;">void glNewList( GLuint list, GLenum mode );
+</pre>
+</div>
+<p>Where:</p>
+<ul>
+<li><strong>GLuint list</strong>: The display list object ID that was previously generated with <strong>glGenLists</strong>.</li>
+<li><strong>GLenum mode</strong>: Specifies the compilation mode and can be either:
+<ul>
+<li><strong>GL_COMPILE</strong>: Commands are only compiled into the display list.</li>
+<li><strong>GL_COMPILE_AND_EXECUTE</strong>: Commands are executed and compiled into the display list.</li>
+</ul>
+</ul>
+<p>Only a subset of OpenGL render commands are compiled into a display list. These commands include setting vertex attributes using <strong>glColor</strong>, or <strong>glNormal</strong> family of functions, setting material properties with <strong>glMaterial</strong> functions, state settings like lighting and texture states, matrix stack manipulation, and the like. However you should be aware that state changes made in a display list are not automatically restored after a display list has finished executing. You should make sure that any changes made in the display list are restored before you end the display list.</p>
+<p>Functions that will <strong>NOT</strong> be compiled into a display list include enabling and disabling client states, querying state values using methods like the <strong>glGet</strong> family of functions and the <strong>glIsEnabled</strong>, <strong>glIsList</strong>, <strong>glIsTexture</strong>, etcetera.</p>
+<p>A previously compiled display list can be executed using the <strong>glCallList</strong> method. This method takes as it&#8217;s only argument the object ID for a display list that was created with <strong>glGenLists</strong> and compiled with <strong>glNewList</strong>.</p>
+<p>Executing a display list with <strong>glCallList</strong> is equivalent to invoking all of the compiled commands that were called when the display list was created.</p>
+<p>Let&#8217;s see an example of creating the cube shape again but this time using display lists.</p>
+<h2><span id="Generating_Display_Lists">Generating Display Lists</span></h2>
+<p>In this example, I will show how to generate a simple cube display list and render it to the screen.</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:111;" title="main.cpp">// Generate a cube display list
+// The cube is centered at the origin of the reference frame
+// and each edge of the cube has a length size.
+GLuint CubeDisplayList( GLfloat size )
+{
+    // The distance from the center to the outside of the cube
+    // is half the size.
+    size = size / 2.0f;
+
+    GLuint displayList = glGenLists(1);
+    glNewList( displayList, GL_COMPILE );
+    {
+        glBegin( GL_QUADS );
+        // Top face
+        glColor3f(   0.0f, 1.0f,  0.0f );  // Green
+        glVertex3d(  size, size, -size );  // Top-right of top face
+        glVertex3f( -size, size, -size );  // Top-left of top face
+        glVertex3f( -size, size,  size );  // Bottom-left of top face
+        glVertex3f(  size, size,  size );  // Bottom-right of top face
+
+        // Bottom face
+        glColor3f(   1.0f,  0.5f,  0.0f ); // Orange
+        glVertex3f(  size, -size, -size ); // Top-right of bottom face
+        glVertex3f( -size, -size, -size ); // Top-left of bottom face
+        glVertex3f( -size, -size,  size ); // Bottom-left of bottom face
+        glVertex3f(  size, -size,  size ); // Bottom-right of bottom face
+
+        // Front face
+        glColor3f(   1.0f,  0.0f, 0.0f );  // Red
+        glVertex3f(  size,  size, size );  // Top-Right of front face
+        glVertex3f( -size,  size, size );  // Top-left of front face
+        glVertex3f( -size, -size, size );  // Bottom-left of front face
+        glVertex3f(  size, -size, size );  // Bottom-right of front face
+
+        // Back face
+        glColor3f(   1.0f,  1.0f,  0.0f ); // Yellow
+        glVertex3f(  size, -size, -size ); // Bottom-Left of back face
+        glVertex3f( -size, -size, -size ); // Bottom-Right of back face
+        glVertex3f( -size,  size, -size ); // Top-Right of back face
+        glVertex3f(  size,  size, -size ); // Top-Left of back face
+
+        // Left face
+        glColor3f(   0.0f,  0.0f,  1.0f);  // Blue
+        glVertex3f( -size,  size,  size);  // Top-Right of left face
+        glVertex3f( -size,  size, -size);  // Top-Left of left face
+        glVertex3f( -size, -size, -size);  // Bottom-Left of left face
+        glVertex3f( -size, -size,  size);  // Bottom-Right of left face
+
+        // Right face
+        glColor3f(   1.0f,  0.0f,  1.0f);  // Magenta
+        glVertex3f(  size,  size,  size);  // Top-Right of left face
+        glVertex3f(  size,  size, -size);  // Top-Left of left face
+        glVertex3f(  size, -size, -size);  // Bottom-Left of left face
+        glVertex3f(  size, -size,  size);  // Bottom-Right of left face
+        glEnd();        
+    }
+    glEndList();
+
+    return displayList;
+}
+</pre>
+</div>
+<p>The <strong>CubeDisplayList</strong> method will generate a new display list, compile the list, then return the object ID that represents the display list. Most of the details of this function was explained in the section of immediate mode rendering, so there isn&#8217;t much new information to tell.</p>
+<p>Notice that the display list is generated on line 120 using the <strong>glGenLists</strong> method specify that only a single display list should be generated.</p>
+<p>The display list is compiled on line 121 with the <strong>glNewList</strong> method. Notice we only specify that the list should be compiled, so none of the methods called while compiling the list will actually be executed.</p>
+<p>Then the commands of the display list are invoked.</p>
+<p>On line 167, the display list is ended with the <strong>glEndList</strong> method. This must be called before we can actually use the display list later in the application.</p>
+<h2><span id="Rendering_the_Display_List">Rendering the Display List</span></h2>
+<p>Display lists are rendered using the <strong>glCallList</strong> method. The only argument to this method is the ID of the display list object to render.</p>
+<div class="notranslate">
+<pre class="brush:cpp;toolbar:false;first-line:735;" title="main.cpp">void RenderScene6()
+{
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+
+    glEnable( GL_DEPTH_TEST );
+
+    glTranslatef( 0, 0, -3.0f );                     // Translate back 3 units
+    glRotatef(g_fRotate1, 1.0f, 1.0f, 1.0f );        // Rotate on all 3 axis
+
+    // Render the cube display list.
+    glCallList(g_CubeDisplayList);
+}
+</pre>
+</div>
+<p>You will notice that this is the simplest form of all the rendering methods we have seen so far. The only thing we have to do is render the list with <strong>glCallList</strong> on line 746.</p>
+<h2><span id="Delete_the_Display_List">Delete the Display List</span></h2>
+<p>A display list is an OpenGL context resource. This means that it requires storage space somewhere to define it. Every time you generate a display list, it is generally a good idea to delete it when you are finished with it. The display list is deleted with the <strong>glDeleteList</strong> method.</p>
+<h1><span id="Conclusion">Conclusion</span></h1>
+<p>In this article I described three different ways to render shapes to the screen using OpenGL. The first method demonstrated is immediate mode rendering. Using immediate mode rendering, each vertex attribute and vertex position requires a function to be called to define it. This is a very inefficient way of rendering but it may be useful for quickly drawing debug information on the screen.</p>
+<p>The next rendering method is called vertex arrays. Vertex arrays are more efficient than immediate mode rendering because you define all of the attributes and vertex positions with a single draw call. Using this method, the client data is sent to the GPU every time it is used. This is not ideal if the vertex data never changes. It would be much more efficient to just define the data on the GPU and then render it directly whenever necessary.</p>
+<p>The final method investigated in this article is display lists. Display lists allow us to define a pre-compiled set of instructions on the GPU and execute that set of instructions very quickly later on.</p>
+<p>Although all of these methods shown in this article have been deprecated since OpenGL 3, it is useful to understand the roots of OpenGL programming because then it is easier to understand where the current OpenGL implementation came from and may also provide an insight into the direction that the OpenGL API is going.</p>
+<p>In a later article I will explain how to use vertex buffer objects (VBO&#8217;s) to render the geometry in a much more efficient way that doesn&#8217;t require copying large vertex arrays the the GPU every time you want to render it.</p>
+<h1><span id="Video_Lecture">Video Lecture</span></h1>
+<p>The video lecture for this article. This video is best viewed at 1080p can should be easily visible in 720p.</p>
+<p><iframe width="640" height="360" src="https://www.youtube.com/embed/6mT9fbaL2qw?rel=0" frameborder="0" allowfullscreen></iframe></p>
+<h1><span id="References">References</span></h1>
+<table border="0">
+<tbody>
+<tr>
+<td>
+<div id="attachment_1203" style="width: 160px" class="wp-caption alignleft"><a href="https://www.3dgep.com/wp-content/uploads/2011/03/Beginning-OpenGL-Game-Programming-Second-Edition-2009.jpg"><img class="size-thumbnail wp-image-1203" title="Beginning OpenGL Game Programming - Second Edition (2009)" src="https://www.3dgep.com/wp-content/uploads/2011/03/Beginning-OpenGL-Game-Programming-Second-Edition-2009-150x150.jpg" alt="" width="150" height="150" /></a><p class="wp-caption-text">Beginning OpenGL Game Programming - Second Edition (2009)</p></div>
+Benstead, Luke with Astle, D. and Hawkins, K. (2009). <a href="http://books.google.nl/books?id=niUeMAAACAAJ" title="Beginning OpenGL Game Programming" target="_blank">Beginning OpenGL Game Programming. 2nd. ed.</a> Boston, MA: Course Technology.</td>
+</tr>
+<tr>
+<td>OpenGL 2.1 Reference Pages [online]. (1991-2006) [Accessed 27 January 2012]. Available from: <a href="http://www.opengl.org/sdk/docs/man/" title="OpenGL 2.1 Reference Pages" target="_blank">http://www.opengl.org/sdk/docs/man/</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<footer class="entry-meta">
+This entry was posted in <a href="https://www.3dgep.com/category/graphics-programming/" rel="category tag">Graphics Programming</a>, <a href="https://www.3dgep.com/category/graphics-programming/opengl/" rel="category tag">OpenGL</a> and tagged <a href="https://www.3dgep.com/tag/3d/" rel="tag">3D</a>, <a href="https://www.3dgep.com/tag/attributes/" rel="tag">attributes</a>, <a href="https://www.3dgep.com/tag/c/" rel="tag">C++</a>, <a href="https://www.3dgep.com/tag/display-lists/" rel="tag">display lists</a>, <a href="https://www.3dgep.com/tag/game/" rel="tag">game</a>, <a href="https://www.3dgep.com/tag/immediate-mode/" rel="tag">immediate mode</a>, <a href="https://www.3dgep.com/tag/opengl/" rel="tag">OpenGL</a>, <a href="https://www.3dgep.com/tag/programming/" rel="tag">Programming</a>, <a href="https://www.3dgep.com/tag/vertex/" rel="tag">vertex</a>, <a href="https://www.3dgep.com/tag/vertex-array/" rel="tag">vertex array</a> by <a href="https://www.3dgep.com/author/jeremiah/">Jeremiah van Oosten</a>. Bookmark the <a href="https://www.3dgep.com/rendering-primitives-with-opengl/" title="Permalink to Rendering Primitives with OpenGL" rel="bookmark">permalink</a>.
+</footer>
+</article>
+<div id="comments">
+<h2 id="comments-title">
+6 thoughts on &ldquo;<span>Rendering Primitives with OpenGL</span>&rdquo; </h2>
+<ol class="commentlist">
+<li class="comment even thread-even depth-1" id="li-comment-535">
+<article id="comment-535" class="comment">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt='' src='https://secure.gravatar.com/avatar/fe4e8e57f87c2c6153380fa9f4667d57?s=68&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fe4e8e57f87c2c6153380fa9f4667d57?s=136&#038;d=mm&#038;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">Cobus</span> on <a href="https://www.3dgep.com/rendering-primitives-with-opengl/#comment-535"><time datetime="2012-03-07T10:38:10+00:00">March 7, 2012 at 10:38 am</time></a> <span class="says">said:</span>
+</div>
+</footer>
+<div class="comment-content"><p>Thanks for the very good tutorial. I&#8217;m sort of a newbie when it comes to opengl, and to be honest the different functionality between the different versions are rather confusing. As I understand the fixed function pipeline is deprecated, and it seems to me everything is now shader based. This makes it it difficult to learn opengl as most tutorials is still based on immediate mode.<br />
+So what is the easiest and most effective way of rendering objects today, is it VBOs or VAOs or what? All I understand is that immediate mode (begin..end) and display lists are old and on their way out if not already.</p>
+</div>
+<div class="reply">
+<a rel='nofollow' class='comment-reply-link' href='#comment-535' onclick='return addComment.moveForm( "comment-535", "535", "respond", "2365" )' aria-label='Reply to Cobus'>Reply <span>&darr;</span></a> </div>
+</article>
+<ul class="children">
+<li class="comment byuser comment-author-jeremiah bypostauthor odd alt depth-2" id="li-comment-536">
+<article id="comment-536" class="comment">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt='' src='https://secure.gravatar.com/avatar/00f2d6dcb1d4602c73bb571194789ab0?s=39&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/00f2d6dcb1d4602c73bb571194789ab0?s=78&#038;d=mm&#038;r=g 2x' class='avatar avatar-39 photo' height='39' width='39' /><span class="fn"><a href='http://3dgep.com' rel='external nofollow' class='url'>Jeremiah van Oosten</a></span> on <a href="https://www.3dgep.com/rendering-primitives-with-opengl/#comment-536"><time datetime="2012-03-07T13:57:02+00:00">March 7, 2012 at 1:57 pm</time></a> <span class="says">said:</span>
+</div>
+</footer>
+<div class="comment-content"><p>Cobus: By the time you posted this, I&#8217;ve already uploaded a new article on using VBOs. Using VBO&#8217;s is pretty much the standard way of getting things on your screen in OpenGL. Since all other methods of rendering primitives have been depricated, it&#8217;s the only way to get geometry to be rendered if you choose to strictly follow the deprication model introduced in OpenGL 3.0.</p>
+<p>Take a look at my new article on VBOs here:<br />
+<a href="http://3dgep.com/?p=2596" title="Using OpenGL Vertex Buffer Objects" rel="nofollow">http://3dgep.com/?p=2596</a></p>
+</div>
+<div class="reply">
+<a rel='nofollow' class='comment-reply-link' href='#comment-536' onclick='return addComment.moveForm( "comment-536", "536", "respond", "2365" )' aria-label='Reply to Jeremiah van Oosten'>Reply <span>&darr;</span></a> </div>
+</article>
+</li>
+</ul>
+</li>
+<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1698">
+<article id="comment-1698" class="comment">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt='' src='https://secure.gravatar.com/avatar/8f4bdd9b644a887f23f3874406347b0e?s=68&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8f4bdd9b644a887f23f3874406347b0e?s=136&#038;d=mm&#038;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">KOA</span> on <a href="https://www.3dgep.com/rendering-primitives-with-opengl/#comment-1698"><time datetime="2013-02-06T14:38:29+00:00">February 6, 2013 at 2:38 pm</time></a> <span class="says">said:</span>
+</div>
+</footer>
+<div class="comment-content"><p>Under &#8220;Delete the Display List&#8221; </p>
+<p>You wrote glDeletList instead of glDeleteList.</p>
+</div>
+<div class="reply">
+<a rel='nofollow' class='comment-reply-link' href='#comment-1698' onclick='return addComment.moveForm( "comment-1698", "1698", "respond", "2365" )' aria-label='Reply to KOA'>Reply <span>&darr;</span></a> </div>
+</article>
+<ul class="children">
+<li class="comment byuser comment-author-jeremiah bypostauthor odd alt depth-2" id="li-comment-1728">
+<article id="comment-1728" class="comment">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt='' src='https://secure.gravatar.com/avatar/00f2d6dcb1d4602c73bb571194789ab0?s=39&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/00f2d6dcb1d4602c73bb571194789ab0?s=78&#038;d=mm&#038;r=g 2x' class='avatar avatar-39 photo' height='39' width='39' /><span class="fn"><a href='http://3dgep.com' rel='external nofollow' class='url'>Jeremiah van Oosten</a></span> on <a href="https://www.3dgep.com/rendering-primitives-with-opengl/#comment-1728"><time datetime="2013-02-17T22:16:12+00:00">February 17, 2013 at 10:16 pm</time></a> <span class="says">said:</span>
+</div>
+</footer>
+<div class="comment-content"><p>Thanks for pointing this out. It&#8217;s fixed now.</p>
+</div>
+<div class="reply">
+<a rel='nofollow' class='comment-reply-link' href='#comment-1728' onclick='return addComment.moveForm( "comment-1728", "1728", "respond", "2365" )' aria-label='Reply to Jeremiah van Oosten'>Reply <span>&darr;</span></a> </div>
+</article>
+</li>
+</ul>
+</li>
+<li class="comment even thread-even depth-1" id="li-comment-1699">
+<article id="comment-1699" class="comment">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt='' src='https://secure.gravatar.com/avatar/16302e28d67843d042d0b61ccc79f9be?s=68&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/16302e28d67843d042d0b61ccc79f9be?s=136&#038;d=mm&#038;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">Thijs</span> on <a href="https://www.3dgep.com/rendering-primitives-with-opengl/#comment-1699"><time datetime="2013-02-06T14:38:39+00:00">February 6, 2013 at 2:38 pm</time></a> <span class="says">said:</span>
+</div>
+</footer>
+<div class="comment-content"><p>On the &#8220;Delete the Display List&#8221; part you spell &#8216;glDeletList&#8217; which should be glDeleteLists, of course.<br />
+Great explanation, haven&#8217;t seen the high quality video tutorial yet.</p>
+</div>
+<div class="reply">
+<a rel='nofollow' class='comment-reply-link' href='#comment-1699' onclick='return addComment.moveForm( "comment-1699", "1699", "respond", "2365" )' aria-label='Reply to Thijs'>Reply <span>&darr;</span></a> </div>
+</article>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1700">
+<article id="comment-1700" class="comment">
+<footer class="comment-meta">
+<div class="comment-author vcard">
+<img alt='' src='https://secure.gravatar.com/avatar/85ac75c5fae88c161322da3b370612bc?s=68&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/85ac75c5fae88c161322da3b370612bc?s=136&#038;d=mm&#038;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn"><a href='https://twitter.com/juuljoosten' rel='external nofollow' class='url'>Juul Joosten</a></span> on <a href="https://www.3dgep.com/rendering-primitives-with-opengl/#comment-1700"><time datetime="2013-02-06T14:45:42+00:00">February 6, 2013 at 2:45 pm</time></a> <span class="says">said:</span>
+</div>
+</footer>
+<div class="comment-content"><p>A cool way to generate the positions for the cube yourself is by using this small loop. The index buffer that goes with this loop is included below, the index buffer is counter clock wise.</p>
+<p>float position[3];<br />
+for (int i = 0; i &lt; 8; ++i)<br />
+{<br />
+position[0] = ( ( i &amp; 1 ) ? half : -half );<br />
+position[1] = ( ( i &amp; 2 ) ? half : -half );<br />
+position[2] = ( ( i &amp; 4 ) ? half : -half );</p>
+<p> // do stuff with the position (like add it to the vertex buffer<br />
+}</p>
+<p>unsigned long indices[36] =	{1,5,3,3,5,7,<br />
+0,1,2,2,1,3,<br />
+5,4,7,7,4,6,<br />
+4,0,6,6,0,2,<br />
+0,4,1,1,4,5,<br />
+3,7,2,2,7,6};</p>
+</div>
+<div class="reply">
+<a rel='nofollow' class='comment-reply-link' href='#comment-1700' onclick='return addComment.moveForm( "comment-1700", "1700", "respond", "2365" )' aria-label='Reply to Juul Joosten'>Reply <span>&darr;</span></a> </div>
+</article>
+</li>
+</ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/rendering-primitives-with-opengl/#respond" style="display:none;">Cancel reply</a></small></h3> <form action="https://www.3dgep.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='2365' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="121ff29817" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="19" /></p> </form>
+</div>
+<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<footer id="colophon" role="contentinfo">
+<div id="supplementary" class="two">
+<div id="first" class="widget-area" role="complementary">
+<aside id="text-3" class="widget widget_text"> <div class="textwidget"><a href="http://made.nhtv.nl/" title="my Academy for Digital Entertainment">
+<img src="https://3dgep.com/wp-content/uploads/2012/04/MADE-logo-320x90.gif" width="320" height="89" /></a>
+</div>
+</aside> </div>
+<div id="third" class="widget-area" role="complementary">
+<aside id="text-4" class="widget widget_text"> <div class="textwidget"><a href="http://www.nhtv.nl/ENG/home.html" title="Breda University of Applied Sciences">
+<img src="https://3dgep.com/wp-content/uploads/2012/04/NHTV-logo-300x90.gif" width="158" height="90" align="right" />
+</a>
+</div>
+</aside> </div>
+</div>
+<div id="site-generator">
+<a href="https://wordpress.org/" class="imprint" title="Semantic Personal Publishing Platform">
+Proudly powered by WordPress </a>
+</div>
+</footer>
+</div>
+<script type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/prettyphoto-media/js/jquery.prettyPhoto.min.js?ver=3.1.4'></script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var MTBrushParams = {"baseUrl":"https:\/\/www.3dgep.com\/wp-content\/plugins\/syntax-highlighter-mt"};
+var MTBrushParams = {"baseUrl":"https:\/\/www.3dgep.com\/wp-content\/plugins\/syntax-highlighter-mt"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/syntax-highlighter-mt/brushTypes.js?ver=2.2.5'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/table-of-contents-plus/front.min.js?ver=1509'></script>
+<script type='text/javascript' src='https://www.3dgep.com/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='https://www.3dgep.com/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#038;ver=1.3.10'></script>
+<script>
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+</script>
+</body>
+</html>
