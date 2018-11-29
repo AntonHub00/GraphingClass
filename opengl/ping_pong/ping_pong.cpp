@@ -3,8 +3,11 @@
 #include <math.h>
 
 double angle = 0.0;
-double pos_x = 0.0, pos_y = 0.0;
-double distance = 0.0;
+double ball_x = 0.0, ball_y = 0.0;
+double left_stick_x = 0.0, left_stick_y = 0.0;
+double right_stick_x = 0.0, right_stick_y = 0.0;
+double distance_l = 0.0, distance_r = 0.0;
+bool flag = true;
 
 void init()
 {
@@ -21,47 +24,27 @@ void draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    //Little guy#########
+    //Wired sphere/teapot#########
     glPushMatrix(); ////////////////////////////////////////////////////////
-    glTranslatef(pos_x, pos_y, 0.0);
-    glBegin(GL_POINTS);
-    glColor3f(0.2, 0.6, 0.5);
-    glVertex2f(0.07, -0.015);
-    glVertex2f(0.01, -0.015);
-    glColor3f(0.2, 0.6, 0.5);
-    glVertex2f(-0.01, 0.09);
-    glVertex2f(0.09, 0.09);
-    glColor3f(0.3, 0.2, 0.2);
-    glVertex2f(-0.01, 0.11);
-    glVertex2f(0.09, 0.11);
-    glColor3f(0.3, 0.2,0.2);
-    glVertex2f(0.0, 0.11);
-    glVertex2f(0.08, 0.11);
-    glEnd();
+    glColor3f(0.5, 0.5, 0.5);
+    glTranslatef(0.0, 0.0, 0.0);
+    glRotated(angle, 1, 1, 1);
+    glutWireTeapot(0.25);
+    //glutWireSphere(0.25, 15, 15);
+    glPopMatrix(); ////////////////////////////////////////////////////////
 
-    glScaled(2, 2, 0);
-
-    glBegin(GL_QUADS);
-    glColor3f(0.3, 0.2, 0.2);
-    glVertex2f(0.0, 0.00);
-    glVertex2f(0.04, 0.0);
-    glVertex2f(0.04, 0.04);
-    glVertex2f(0.0, 0.04);
-    glEnd();
-
-    glBegin(GL_QUADS);
-    glColor3f(0.2, 0.6, 0.5);
-    glVertex2f(0.0, 0.04);
-    glVertex2f(0.04, 0.04);
-    glVertex2f(0.04, 0.08);
-    glVertex2f(0.0, 0.08);
-    glEnd();
+    //Solid sphere#########
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0, 0.0, 0.0);
+    glTranslatef(ball_x, ball_y, 0.0);
+    glutSolidSphere(0.05, 15, 15);
     glPopMatrix(); ////////////////////////////////////////////////////////
 
     //Left stick########
     glPushMatrix(); ////////////////////////////////////////////////////////
     glBegin(GL_QUADS);
     glColor3f(0.0, 0.0, 0.0);
+    glTranslatef(left_stick_x, left_stick_y, 0.0);
     glVertex2f(-1.0, 0.3);
     glVertex2f(-0.95, 0.3);
     glVertex2f(-0.95, -0.3);
@@ -73,6 +56,7 @@ void draw()
     glPushMatrix(); ////////////////////////////////////////////////////////
     glBegin(GL_QUADS);
     glColor3f(0.0, 0.0, 0.0);
+    //glTranslatef(right_stick_x, right_stick_y, 0.0);
     glVertex2f(1.0, 0.3);
     glVertex2f(0.95, 0.3);
     glVertex2f(0.95, -0.3);
@@ -80,25 +64,26 @@ void draw()
     glEnd();
     glPopMatrix(); ////////////////////////////////////////////////////////
 
-    //Wired sphere#########
-    glPushMatrix(); ////////////////////////////////////////////////////////
-    glColor3f(0.5, 0.5, 0.5);
-    glTranslatef(0.0, 0.0, 0.0);
-    glRotated(angle, 1, 1, 1);
-    glScalef(1.0, 1.0, 1.0);
-    glutWireSphere(1.0, 15, 15);
-    glPopMatrix(); ////////////////////////////////////////////////////////
-
     glutSwapBuffers();
 }
 
 void refresh()
 {
-	distance = sqrt((-0.75 - pos_x) * (-0.75 - pos_x) + (-0.75 - pos_y) * (-0.75 - pos_y));
-    std::cout << "x = " << pos_x << "||y = " << pos_y << "||distance = " << distance << std::endl;
+    angle += 0.9;
+	distance_l = sqrt(pow(-1.0 - ball_x, 2) + pow(-1.0 - (-1.0), 2));
+	distance_r = sqrt(pow(1.0 - 1.0, 2) + pow(1.0 - (ball_x), 2));
+    std::cout << "x = " << ball_x << "||y = " << ball_y << "||distance_l = " << distance_l << std::endl;
+    std::cout << "x = " << ball_x << "||y = " << ball_y << "||distance_r = " << distance_r << std::endl;
 
-	if(distance >= 0.0000 && distance <= 0.1000)
-        angle += 0.9;
+	if(distance_l <= 0.01000)
+        flag = false;
+	if(distance_r <= 0.01000)
+        flag = true;
+
+    if (flag == true)
+        ball_x -= 0.01;
+    else
+        ball_x += 0.01;
 
 	glutPostRedisplay();
 }
@@ -108,24 +93,25 @@ void keys_setup(unsigned char key, int x, int y)
     switch(key)
     {
         case 'w':
-            pos_y += 0.02;
+            //pos_y += 0.02;
             break;
         case 's':
-            pos_y -= 0.02;
+            //pos_y -= 0.02;
             break;
         case 'a':
-            pos_x -= 0.02;
+            //pos_x -= 0.02;
             break;
         case 'd':
-            pos_x += 0.02;
+            //pos_x += 0.02;
             break;
     }
 }
 
-int main(int argc, char **args) {
+int main(int argc, char **args)
+{
     glutInit(&argc, args);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowPosition(400, 000);
+    glutInitWindowPosition(400, 0);
     glutInitWindowSize(700, 700);
     glutCreateWindow("Ping Pong");
     init();
@@ -136,4 +122,3 @@ int main(int argc, char **args) {
 
     return 0;
 }
-

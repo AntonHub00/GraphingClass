@@ -75,7 +75,8 @@ void keys_setup(unsigned char key, int x, int y)
     }
 }
 
-int main(int argc, char **args) {
+int main(int argc, char **args)
+{
     glutInit(&argc, args);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowPosition(400, 000);
