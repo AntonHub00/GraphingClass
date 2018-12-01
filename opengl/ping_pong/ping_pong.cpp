@@ -24,7 +24,7 @@ void draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    //Wired sphere/teapot#########
+    //Wired sphere/teapot #########
     glPushMatrix(); ////////////////////////////////////////////////////////
     glColor3f(0.5, 0.5, 0.5);
     glTranslatef(0.0, 0.0, 0.0);
@@ -33,14 +33,14 @@ void draw()
     //glutWireSphere(0.25, 15, 15);
     glPopMatrix(); ////////////////////////////////////////////////////////
 
-    //Solid sphere#########
+    //Solid sphere #########
     glPushMatrix(); ////////////////////////////////////////////////////////
     glColor3f(1.0, 0.0, 0.0);
     glTranslatef(ball_x, ball_y, 0.0);
     glutSolidSphere(0.05, 15, 15);
     glPopMatrix(); ////////////////////////////////////////////////////////
 
-    //Left stick########
+    //Left stick ########
     glPushMatrix(); ////////////////////////////////////////////////////////
     glBegin(GL_QUADS);
     glColor3f(0.0, 0.0, 0.0);
@@ -52,7 +52,7 @@ void draw()
     glEnd();
     glPopMatrix(); ////////////////////////////////////////////////////////
 
-    //Right stick########
+    //Right stick ########
     glPushMatrix(); ////////////////////////////////////////////////////////
     glBegin(GL_QUADS);
     glColor3f(0.0, 0.0, 0.0);
@@ -70,8 +70,8 @@ void draw()
 void refresh()
 {
     angle += 0.9;
-	distance_l = sqrt(pow(-1.0 - ball_x, 2) + pow(-1.0 - (-1.0), 2));
-	distance_r = sqrt(pow(1.0 - 1.0, 2) + pow(1.0 - (ball_x), 2));
+	distance_l = sqrt((-1.0 - ball_x) * (-1.0 - ball_x) + (-1.0 - (-1.0)) * (-1.0 - (-1.0)));
+	distance_r = sqrt((1.0 - 1.0) * (1.0 - 1.0) + (1.0 - (ball_x)) * (1.0 - (ball_x)));
     std::cout << "x = " << ball_x << "||y = " << ball_y << "||distance_l = " << distance_l << std::endl;
     std::cout << "x = " << ball_x << "||y = " << ball_y << "||distance_r = " << distance_r << std::endl;
 
@@ -93,10 +93,10 @@ void keys_setup(unsigned char key, int x, int y)
     switch(key)
     {
         case 'w':
-            //pos_y += 0.02;
+             left_stick_y += 0.02;
             break;
         case 's':
-            //pos_y -= 0.02;
+             left_stick_y -= 0.02;
             break;
         case 'a':
             //pos_x -= 0.02;
