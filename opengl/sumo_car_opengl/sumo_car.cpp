@@ -2,20 +2,29 @@
 #include <math.h>
 #include <stdio.h>
 
-float angle=0.0;
-float lx=0.0f,lz=-1.0f;
-float x=0.0f,z=5.0f;
+float angle = 0.0;
+float lx = 0.0f, lz = -1.0f;
+float x = 0.0f, z = 5.0f;
 
-void drawSnowMan()
+void body()
 {
     glPushMatrix();
-    glColor3f(0.0f, 0.0f, 1.0f);
-    glTranslatef(0.0f ,0.0f, 0.0f);
-	glutWireCube(2.0);
+    glColor3f(0.90f, 1.0f, 0.0f);
+    glTranslatef(0.0f ,1.0f, 0.0f);
+    glScalef(1.5f ,0.5f, 1.0f);
+	glutSolidCube(2.0);
 	glPopMatrix();
-
 }
 
+void wheel()
+{
+    glPushMatrix();
+    glColor3f(0.09, 0.83f, 0.34f);
+    glTranslatef(0.0f ,1.0f, 0.0f);
+    glScalef(0.7f ,0.7f, 0.7f);
+	glutSolidTorus(0.4f, 0.7f, 10, 20);
+	glPopMatrix();
+}
 
 void renderScene(void)
 {
@@ -33,16 +42,30 @@ void renderScene(void)
 	glVertex3f( 100.0f, 0.0f, -100.0f);
 	glEnd();
 
-	//for(int i = -3; i < 3; i++)
-    //{
-    //    for(int j=-3; j < 3; j++)
-    //    {
-            glPushMatrix();
-            glTranslatef(0,0,0);
-            drawSnowMan();
-            glPopMatrix();
-    //    }
-    //}
+    glPushMatrix();
+    glTranslatef(0, 0, 0);
+    body();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-1.5, 0, 1.2);
+    wheel();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(1.5, 0, 1.2);
+    wheel();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-1.5, 0, -1.2);
+    wheel();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(1.5, 0, -1.2);
+    wheel();
+    glPopMatrix();
 
 	glutSwapBuffers();
 }
@@ -68,17 +91,17 @@ void changeSize(int w, int h)
 
 void processSpecialKeys(int key, int xx, int yy) //MOVER CON EL TECLADO EL ESCENARIO
 {
-	float fraction = 0.1f;
+	float fraction = 0.5f;
 
 	switch (key)
     {
 		case GLUT_KEY_LEFT :
-			angle -= 0.01f;
+			angle -= 0.05f;
 			lx = sin(angle);
 			lz = -cos(angle);
 			break;
 		case GLUT_KEY_RIGHT :
-			angle += 0.01f;
+			angle += 0.05f;
 			lx = sin(angle);
 			lz = -cos(angle);
 			break;
