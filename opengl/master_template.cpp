@@ -81,7 +81,7 @@ int main(int argc, char **args)
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowPosition(400, 000);
     glutInitWindowSize(700, 700);
-    glutCreateWindow("Ping Pong");
+    glutCreateWindow("Master template");
     init();
     glutDisplayFunc(draw);
     glutIdleFunc(refresh);
