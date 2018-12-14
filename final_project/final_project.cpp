@@ -12,6 +12,9 @@ float angle = 0.0;
 float lx = 0.0f, lz = -1.0f, ly = 1.0f;
 float x = 0.0f, z = 0.0f, y = 1.0f;
 
+float lx_bu = 0.0f, lz_bu = 0.0f, ly_bu = 0.0f;
+float x_bu = 0.0f, z_bu = 0.0f, y_bu = 0.0f;
+
 float collision_radius = 0.8;
 
 //LEFT WALL//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,6 +144,67 @@ float distance_9_d = 0.0;
 //Cube10 collision data
 float collision_x_10_d = 8.0, collision_y_10_d = 1.0, collision_z_10_d= 0.0;
 float distance_10_d = 0.0;
+
+//MIDDLE 1 WALL//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Cube1 collision data
+float collision_x_1_m_1 = 1.0, collision_y_1_m_1 = 1.0, collision_z_1_m_1 = -1.0;
+float distance_1_m_1 = 0.0;
+//Cube2 collision data
+float collision_x_2_m_1 = 1.0, collision_y_2_m_1 = 1.0, collision_z_2_m_1 = -2.0;
+float distance_2_m_1 = 0.0;
+//Cube3 collision data
+float collision_x_3_m_1 = 1.0, collision_y_3_m_1 = 1.0, collision_z_3_m_1 = -3.0;
+float distance_3_m_1 = 0.0;
+//Cube4 collision data
+float collision_x_4_m_1 = 1.0, collision_y_4_m_1 = 1.0, collision_z_4_m_1 = -4.0;
+float distance_4_m_1 = 0.0;
+//Cube5 collision data
+float collision_x_5_m_1 = 1.0, collision_y_5_m_1 = 1.0, collision_z_5_m_1 = -5.0;
+float distance_5_m_1 = 0.0;
+//Cube6 collision data
+float collision_x_6_m_1 = 1.0, collision_y_6_m_1 = 1.0, collision_z_6_m_1 = -6.0;
+float distance_6_m_1 = 0.0;
+//Cube7 collision data
+float collision_x_7_m_1 = 1.0, collision_y_7_m_1 = 1.0, collision_z_7_m_1 = -7.0;
+float distance_7_m_1 = 0.0;
+//Cube8 collision data
+float collision_x_8_m_1 = 1.0, collision_y_8_m_1 = 1.0, collision_z_8_m_1 = -8.0;
+float distance_8_m_1 = 0.0;
+//Cube9 collision data
+float collision_x_9_m_1 = 1.0, collision_y_9_m_1 = 1.0, collision_z_9_m_1 = -9.0;
+float distance_9_m_1 = 0.0;
+
+//MIDDLE 2 WALL//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Cube1 collision data
+float collision_x_1_m_2 = 3.0, collision_y_1_m_2 = 1.0, collision_z_1_m_2 = -2.0;
+float distance_1_m_2 = 0.0;
+//Cube2 collision data
+float collision_x_2_m_2 = 3.0, collision_y_2_m_2 = 1.0, collision_z_2_m_2 = -3.0;
+float distance_2_m_2 = 0.0;
+//Cube3 collision data
+float collision_x_3_m_2 = 3.0, collision_y_3_m_2 = 1.0, collision_z_3_m_2 = -4.0;
+float distance_3_m_2 = 0.0;
+//Cube4 collision data
+float collision_x_4_m_2 = 3.0, collision_y_4_m_2 = 1.0, collision_z_4_m_2 = -5.0;
+float distance_4_m_2 = 0.0;
+//Cube5 collision data
+float collision_x_5_m_2 = 3.0, collision_y_5_m_2 = 1.0, collision_z_5_m_2 = -6.0;
+float distance_5_m_2 = 0.0;
+//Cube6 collision data
+float collision_x_6_m_2 = 3.0, collision_y_6_m_2 = 1.0, collision_z_6_m_2 = -7.0;
+float distance_6_m_2 = 0.0;
+//Cube7 collision data
+float collision_x_7_m_2 = 3.0, collision_y_7_m_2 = 1.0, collision_z_7_m_2 = -8.0;
+float distance_7_m_2 = 0.0;
+//Cube8 collision data
+float collision_x_8_m_2 = 3.0, collision_y_8_m_2 = 1.0, collision_z_8_m_2 = -9.0;
+float distance_8_m_2 = 0.0;
+//Cube9 collision data
+float collision_x_9_m_2 = 3.0, collision_y_9_m_2 = 1.0, collision_z_9_m_2 = -10.0;
+float distance_9_m_2 = 0.0;
+
+
+
 
 void draw()
 {
@@ -427,6 +491,134 @@ void draw()
     glTranslatef(collision_x_10_d, collision_y_10_d, collision_z_10_d);
 	glutSolidCube(1.0);
 	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //MIDDLE 1 WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Cube1_d
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_1_m_1, collision_y_1_m_1, collision_z_1_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_2_m_1, collision_y_2_m_1, collision_z_2_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube3_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glTranslatef(collision_x_3_m_1, collision_y_3_m_1, collision_z_3_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube4_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glTranslatef(collision_x_4_m_1, collision_y_4_m_1, collision_z_4_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube5_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_5_m_1, collision_y_5_m_1, collision_z_5_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube6_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_6_m_1, collision_y_6_m_1, collision_z_6_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube7_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glTranslatef(collision_x_7_m_1, collision_y_7_m_1, collision_z_7_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube8_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glTranslatef(collision_x_8_m_1, collision_y_8_m_1, collision_z_8_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube9_m_1
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glTranslatef(collision_x_9_m_1, collision_y_9_m_1, collision_z_9_m_1);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //MIDDLE 2 WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Cube1_d
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_1_m_2, collision_y_1_m_2, collision_z_1_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_2_m_2, collision_y_2_m_2, collision_z_2_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube3_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glTranslatef(collision_x_3_m_2, collision_y_3_m_2, collision_z_3_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube4_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glTranslatef(collision_x_4_m_2, collision_y_4_m_2, collision_z_4_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube5_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_5_m_2, collision_y_5_m_2, collision_z_5_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube6_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glTranslatef(collision_x_6_m_2, collision_y_6_m_2, collision_z_6_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube7_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glTranslatef(collision_x_7_m_2, collision_y_7_m_2, collision_z_7_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube8_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glTranslatef(collision_x_8_m_2, collision_y_8_m_2, collision_z_8_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
+
+    //Cube9_m_2
+    glPushMatrix(); ////////////////////////////////////////////////////////
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glTranslatef(collision_x_9_m_2, collision_y_9_m_2, collision_z_9_m_2);
+	glutSolidCube(1.0);
+	glPopMatrix(); ////////////////////////////////////////////////////////
 }
 
 void renderScene(void)
@@ -613,6 +805,80 @@ void renderScene(void)
     //Cube10_d
 	distance_10_d = sqrt((collision_x_10_d - x) * (collision_x_10_d - x) + (collision_y_10_d - y) * (collision_y_10_d - y) + (collision_z_10_d - z) * (collision_z_10_d - z));
     std::cout << distance_10_d << std::endl;
+
+    //MIDDLE 1 WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Cube1_m_1
+	distance_1_m_1 = sqrt((collision_x_1_m_1 - x) * (collision_x_1_m_1 - x) + (collision_y_1_m_1 - y) * (collision_y_1_m_1 - y) + (collision_z_1_m_1 - z) * (collision_z_1_m_1 - z));
+    std::cout << distance_1_m_1 << std::endl;
+
+    //Cube2_m_1
+	distance_2_m_1 = sqrt((collision_x_2_m_1 - x) * (collision_x_2_m_1 - x) + (collision_y_2_m_1 - y) * (collision_y_2_m_1 - y) + (collision_z_2_m_1 - z) * (collision_z_2_m_1 - z));
+    std::cout << distance_2_m_1 << std::endl;
+
+    //Cube3_m_1
+	distance_3_m_1 = sqrt((collision_x_3_m_1 - x) * (collision_x_3_m_1 - x) + (collision_y_3_m_1 - y) * (collision_y_3_m_1 - y) + (collision_z_3_m_1 - z) * (collision_z_3_m_1 - z));
+    std::cout << distance_3_m_1 << std::endl;
+
+    //Cube4_m_1
+	distance_4_m_1 = sqrt((collision_x_4_m_1 - x) * (collision_x_4_m_1 - x) + (collision_y_4_m_1 - y) * (collision_y_4_m_1 - y) + (collision_z_4_m_1 - z) * (collision_z_4_m_1 - z));
+    std::cout << distance_4_m_1 << std::endl;
+
+    //Cube5_m_1
+	distance_5_m_1 = sqrt((collision_x_5_m_1 - x) * (collision_x_5_m_1 - x) + (collision_y_5_m_1 - y) * (collision_y_5_m_1 - y) + (collision_z_5_m_1 - z) * (collision_z_5_m_1 - z));
+    std::cout << distance_5_m_1 << std::endl;
+
+    //Cube6_m_1
+	distance_6_m_1 = sqrt((collision_x_6_m_1 - x) * (collision_x_6_m_1 - x) + (collision_y_6_m_1 - y) * (collision_y_6_m_1 - y) + (collision_z_6_m_1 - z) * (collision_z_6_m_1 - z));
+    std::cout << distance_6_m_1 << std::endl;
+
+    //Cube7_m_1
+	distance_7_m_1 = sqrt((collision_x_7_m_1 - x) * (collision_x_7_m_1 - x) + (collision_y_7_m_1 - y) * (collision_y_7_m_1 - y) + (collision_z_7_m_1 - z) * (collision_z_7_m_1 - z));
+    std::cout << distance_7_m_1 << std::endl;
+
+    //Cube8_m_1
+	distance_8_m_1 = sqrt((collision_x_8_m_1 - x) * (collision_x_8_m_1 - x) + (collision_y_8_m_1 - y) * (collision_y_8_m_1 - y) + (collision_z_8_m_1 - z) * (collision_z_8_m_1 - z));
+    std::cout << distance_8_m_1 << std::endl;
+
+    //Cube9_m_1
+	distance_9_m_1 = sqrt((collision_x_9_m_1 - x) * (collision_x_9_m_1 - x) + (collision_y_9_m_1 - y) * (collision_y_9_m_1 - y) + (collision_z_9_m_1 - z) * (collision_z_9_m_1 - z));
+    std::cout << distance_9_m_1 << std::endl;
+
+    //MIDDLE 2 WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Cube1_m_2
+	distance_1_m_2 = sqrt((collision_x_1_m_2 - x) * (collision_x_1_m_2 - x) + (collision_y_1_m_2 - y) * (collision_y_1_m_2 - y) + (collision_z_1_m_2 - z) * (collision_z_1_m_2 - z));
+    std::cout << distance_1_m_2 << std::endl;
+
+    //Cube2_m_2
+	distance_2_m_2 = sqrt((collision_x_2_m_2 - x) * (collision_x_2_m_2 - x) + (collision_y_2_m_2 - y) * (collision_y_2_m_2 - y) + (collision_z_2_m_2 - z) * (collision_z_2_m_2 - z));
+    std::cout << distance_2_m_2 << std::endl;
+
+    //Cube3_m_2
+	distance_3_m_2 = sqrt((collision_x_3_m_2 - x) * (collision_x_3_m_2 - x) + (collision_y_3_m_2 - y) * (collision_y_3_m_2 - y) + (collision_z_3_m_2 - z) * (collision_z_3_m_2 - z));
+    std::cout << distance_3_m_2 << std::endl;
+
+    //Cube4_m_2
+	distance_4_m_2 = sqrt((collision_x_4_m_2 - x) * (collision_x_4_m_2 - x) + (collision_y_4_m_2 - y) * (collision_y_4_m_2 - y) + (collision_z_4_m_2 - z) * (collision_z_4_m_2 - z));
+    std::cout << distance_4_m_2 << std::endl;
+
+    //Cube5_m_2
+	distance_5_m_2 = sqrt((collision_x_5_m_2 - x) * (collision_x_5_m_2 - x) + (collision_y_5_m_2 - y) * (collision_y_5_m_2 - y) + (collision_z_5_m_2 - z) * (collision_z_5_m_2 - z));
+    std::cout << distance_5_m_2 << std::endl;
+
+    //Cube6_m_2
+	distance_6_m_2 = sqrt((collision_x_6_m_2 - x) * (collision_x_6_m_2 - x) + (collision_y_6_m_2 - y) * (collision_y_6_m_2 - y) + (collision_z_6_m_2 - z) * (collision_z_6_m_2 - z));
+    std::cout << distance_6_m_2 << std::endl;
+
+    //Cube7_m_2
+	distance_7_m_2 = sqrt((collision_x_7_m_2 - x) * (collision_x_7_m_2 - x) + (collision_y_7_m_2 - y) * (collision_y_7_m_2 - y) + (collision_z_7_m_2 - z) * (collision_z_7_m_2 - z));
+    std::cout << distance_7_m_2 << std::endl;
+
+    //Cube8_m_2
+	distance_8_m_2 = sqrt((collision_x_8_m_2 - x) * (collision_x_8_m_2 - x) + (collision_y_8_m_2 - y) * (collision_y_8_m_2 - y) + (collision_z_8_m_2 - z) * (collision_z_8_m_2 - z));
+    std::cout << distance_8_m_2 << std::endl;
+
+    //Cube9_m_2
+	distance_9_m_2 = sqrt((collision_x_9_m_2 - x) * (collision_x_9_m_2 - x) + (collision_y_9_m_2 - y) * (collision_y_9_m_2 - y) + (collision_z_9_m_2 - z) * (collision_z_9_m_2 - z));
+    std::cout << distance_9_m_2 << std::endl;
 
     //LEFT WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(distance_1 < collision_radius)//Cube1
@@ -1226,6 +1492,282 @@ void renderScene(void)
         }
     }
 
+    //MIDDLE 1 WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
+	if(distance_1_m_1 < collision_radius)//Cube1_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_2_m_1 < collision_radius)//Cube2_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_3_m_1 < collision_radius)//Cube3_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_4_m_1 < collision_radius)//Cube4_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_5_m_1 < collision_radius)//Cube5_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_6_m_1 < collision_radius)//Cube6_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_7_m_1 < collision_radius)//Cube7_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+
+    else if(distance_8_m_1 < collision_radius)//Cube8_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_9_m_1 < collision_radius)//Cube9_m_1
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+
+    //MIDDLE 2 WALL ////////////////////////////////////////////////////////////////////////////////////////////////////
+	if(distance_1_m_2 < collision_radius)//Cube1_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_2_m_2 < collision_radius)//Cube2_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_3_m_2 < collision_radius)//Cube3_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_4_m_2 < collision_radius)//Cube4_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_5_m_2 < collision_radius)//Cube5_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_6_m_2 < collision_radius)//Cube6_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_7_m_2 < collision_radius)//Cube7_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+
+    else if(distance_8_m_2 < collision_radius)//Cube8_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+    else if(distance_9_m_2 < collision_radius)//Cube9_m_2
+    {
+        std::cout << "Collision!!!!!!!!!" << std::endl;
+
+        if (moved)
+        {
+			x -= lx * fraction;
+			z -= lz * fraction;
+        }
+        else
+        {
+			x += lx * fraction;
+			z += lz * fraction;
+        }
+    }
+
 	glutSwapBuffers();
 }
 
@@ -1272,7 +1814,26 @@ void processSpecialKeys(unsigned char key, int r, int s) //MOVER CON EL TECLADO 
 			lz = -cos(angle);
 			break;
 		case 'm' :
-            y = (y == 40.0) ? 1.0 : 40.0;
+            //y = (y == 40.0) ? 1.0 : 40.0;
+            if (y == 1.0)
+            {
+                y = 40.0;
+                lx_bu = lx;
+                lz_bu = lz;
+                ly_bu = ly;
+                x_bu = x;
+                z_bu = z;
+                y_bu = y;
+            }
+            else
+            {
+                y = 1.0;
+                lx = lx_bu;
+                lz = lz_bu;
+                ly = ly_bu;
+                x = x_bu;
+                z = z_bu;
+            }
 	}
 }
 
